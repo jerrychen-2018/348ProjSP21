@@ -1,6 +1,6 @@
 import tkinter as tk
 import mysql.connector
-
+from tkinter import *
 
 def page1(root):
     id_var = tk.StringVar()
@@ -33,12 +33,24 @@ def page1(root):
 
     adviser_label = tk.Label(root, text='Advisor', font=('calibre', 10, 'bold')).grid(row=6, column=0)
     adviser_entry = tk.Entry(root, textvariable=adviser_var, font=('calibre', 10, 'normal')).grid(row=6, column=1)
-    sub_btn = tk.Button(root, text='Create', command=lambda: get_std_atrb(id_var, name_var, grade_var, gpa_var, dorm_var, classification_var, adviser_var)).grid(row=7, column=1)
+    sub_btn = tk.Button(root, text='ADD', command=lambda: get_std_atrb(id_var, name_var, grade_var, gpa_var, dorm_var, classification_var, adviser_var)).grid(row=7, column=1)
 
     tk.Label(root, text = 'This is the Students page for adding Students to the Students table').grid(row = 8)
-    tk.Button(root, text='To Student Insert Page', command=lambda: changepage(1)).grid(row=9, column=0)
-    tk.Button(root, text='To Faculty Insert Page', command=lambda: changepage(2)).grid(row=9, column=1)
-    tk.Button(root, text='To Course Insert Page', command=lambda: changepage(3)).grid(row=9, column=2)
+    #tk.Button(root, text='To Student Insert Page', command=lambda: changepage(1)).grid(row=9, column=0)
+    #tk.Button(root, text='To Faculty Insert Page', command=lambda: changepage(2)).grid(row=9, column=1)
+    #tk.Button(root, text='To Course Insert Page', command=lambda: changepage(3)).grid(row=9, column=2)
+
+    options = [
+        "Student",
+        "Faculty",
+        "Course"
+    ]
+
+    clicked = tk.StringVar()
+    clicked.set(options[0])
+    drop = OptionMenu(root, clicked, *options).grid(row=9, column=3)
+
+    myButton = tk.Button(root, text="Submit", command=lambda: ok(clicked.get())).grid(row=10, column=3)
 
 
 def page2(root):
@@ -61,12 +73,24 @@ def page2(root):
     phone_label = tk.Label(root, text='Phone Number', font=('calibre', 10, 'bold')).grid(row=3, column=0)
     phone_entry = tk.Entry(root, textvariable=phone_var, font=('calibre', 10, 'normal')).grid(row=3, column=1)
 
-    sub_btn = tk.Button(root, text='Create',
+    sub_btn = tk.Button(root, text='ADD',
                         command=lambda: get_fac_atrb(id_var, name_var, sal_var, phone_var)).grid(row=4, column=1)
     tk.Label(root, text='This is the Faculty page for adding faculty to the Faculty table').grid(row=5)
-    tk.Button(root, text='To Student Insert Page', command=lambda: changepage(1)).grid(row=6, column=0)
-    tk.Button(root, text='To Faculty Insert Page', command=lambda: changepage(2)).grid(row=6, column=1)
-    tk.Button(root, text='To Course Insert Page', command=lambda: changepage(3)).grid(row=6, column=2)
+    #tk.Button(root, text='To Student Insert Page', command=lambda: changepage(1)).grid(row=6, column=0)
+    #tk.Button(root, text='To Faculty Insert Page', command=lambda: changepage(2)).grid(row=6, column=1)
+    #tk.Button(root, text='To Course Insert Page', command=lambda: changepage(3)).grid(row=6, column=2)
+
+    options = [
+        "Student",
+        "Faculty",
+        "Course"
+    ]
+
+    clicked = tk.StringVar()
+    clicked.set(options[1])
+    drop = OptionMenu(root, clicked, *options).grid(row=6, column=3)
+
+    myButton = tk.Button(root, text="Submit", command=lambda: ok(clicked.get())).grid(row=7, column=3)
 
 
 def page3(root):
@@ -81,13 +105,25 @@ def page3(root):
     name_label = tk.Label(root, text='Course Name', font=('calibre', 10, 'bold')).grid(row=1, column=0)
     name_entry = tk.Entry(root, textvariable=name_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
 
-    sub_btn = tk.Button(root, text='Create',
+    sub_btn = tk.Button(root, text='ADD',
                         command=lambda: get_c_atrb(id_var, name_var)).grid(row=2, column=1)
 
     tk.Label(root, text='This is the Faculty page for adding faculty to the Faculty table').grid(row=3)
-    tk.Button(root, text='To Student Insert Page', command=lambda: changepage(1)).grid(row=4, column=0)
-    tk.Button(root, text='To Faculty Insert Page', command=lambda: changepage(2)).grid(row=4, column=1)
-    tk.Button(root, text='To Course Insert Page', command=lambda: changepage(3)).grid(row=4, column=2)
+    #tk.Button(root, text='To Student Insert Page', command=lambda: changepage(1)).grid(row=4, column=0)
+    #tk.Button(root, text='To Faculty Insert Page', command=lambda: changepage(2)).grid(row=4, column=1)
+    #tk.Button(root, text='To Course Insert Page', command=lambda: changepage(3)).grid(row=4, column=2)
+
+    options = [
+        "Student",
+        "Faculty",
+        "Course"
+    ]
+
+    clicked = tk.StringVar()
+    clicked.set(options[2])
+    drop = OptionMenu(root, clicked, *options).grid(row=4, column=3)
+
+    myButton = tk.Button(root, text="Submit", command=lambda: ok(clicked.get())).grid(row=5, column=3)
 
 
 def get_std_atrb(id_var, name_var, grade_var, gpa_var, dorm_var, classification_var, adviser_var):
@@ -190,10 +226,29 @@ def changepage(page_num):
     elif page_num == 3:
         page3(root)
 
+
+def ok(x):
+    if (x == "Student"):
+        p_num = 1
+    elif (x == "Faculty"):
+        p_num = 2
+    elif (x == "Course"):
+        p_num = 3
+    for widget in root.winfo_children():
+        widget.destroy()
+    if p_num == 1:
+        page1(root)
+    elif p_num == 2:
+        page2(root)
+    elif p_num == 3:
+        page3(root)
+
+
 root = tk.Tk()
 width = 1000
 height = 1000
 root.geometry("%dx%d" % (width, height))
 root.title("School System 348")
 page1(root)
+
 root.mainloop()
