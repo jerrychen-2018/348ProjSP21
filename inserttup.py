@@ -1,10 +1,14 @@
 import tkinter as tk
 import mysql.connector
 from tkinter import *
+import main
+import viewtup as view
 
 def page1(root):
     global temp_root
     temp_root = root
+    for widget in root.winfo_children():
+        widget.destroy()
     id_var = tk.StringVar()
     name_var = tk.StringVar()
     grade_var = tk.StringVar()
@@ -41,6 +45,9 @@ def page1(root):
     #tk.Button(root, text='To Student Insert Page', command=lambda: changepage(1)).grid(row=9, column=0)
     #tk.Button(root, text='To Faculty Insert Page', command=lambda: changepage(2)).grid(row=9, column=1)
     #tk.Button(root, text='To Course Insert Page', command=lambda: changepage(3)).grid(row=9, column=2)
+    tk.Button(root, text='Home', command=lambda: main.home(temp_root)).grid(row=9, column=0)
+    tk.Button(root, text='Insert', command=lambda: page1(temp_root)).grid(row=9, column=1)
+    tk.Button(root, text='View', command=lambda: view.page1(temp_root)).grid(row=9, column=2)
 
     options = [
         "Student",
