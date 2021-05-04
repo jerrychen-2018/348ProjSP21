@@ -1,0 +1,6 @@
+drop table BelongsTo;
+create table BelongsTo(student_id integer, club_name varchar(32), primary key(student_id));
+insert into BelongsTo values('0', 'Chess');
+insert into BelongsTo values('1', 'Soccer');
+insert into BelongsTo values('2', 'Wrestling');
+insert into BelongsTo values('4', 'Dance');

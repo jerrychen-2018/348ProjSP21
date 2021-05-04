@@ -1,0 +1,6 @@
+drop table Classroom;
+create table Classroom (room_number varchar(32), building_name varchar(32), capacity integer, primary key(room_number));
+insert into Classroom values ('201', 'Armstrong', '85');
+insert into Classroom values ('104', 'Hicks', '102');
+insert into Classroom values ('202', 'PMU', '120');
+insert into Classroom values ('203', 'PMU', '180');

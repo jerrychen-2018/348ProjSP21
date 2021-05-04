@@ -1,0 +1,7 @@
+drop table Club;
+create table Club(club_name varchar(32),  supervisor_id integer, funding integer, building_name varchar(32), primary key(club_name));
+insert into Club values('Bowling', 0, 310, 'PMU');
+insert into Club values('Dance', 1, 870, 'Corec');
+insert into Club values('Chess', 2, 200, 'PMU');
+insert into Club values('Wrestling', 3,  540, 'Corec');
+insert into Club values('Soccer', 4, 980, 'soccer stadium');
