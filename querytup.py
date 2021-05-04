@@ -10,7 +10,7 @@ def connect():
                                   database='schoolsystem')
     return cnx
 
-def insert_home(root):
+def query_home(root):
     global temp_root
     temp_root = root
     for widget in root.winfo_children():
@@ -147,7 +147,7 @@ def change_page(table):
     for widget in temp_root.winfo_children():
         widget.destroy()
     if table == "back":
-            insert_home(temp_root)
+            query_home(temp_root)
     elif table == "Student":
         student_page(temp_root)
     elif table == "Faculty":
