@@ -1,0 +1,6 @@
+drop table Dormitory;
+create table Dormitory(dorm_name varchar(32), address varchar(32), dining_hall varchar(32), primary key(dorm_name));
+insert into Dormitory values ('Shreve', '3280 Vine St', 'Cordova Hall');
+insert into Dormitory values ('Wiley', '3282 Vine St', 'Purdue Hall');
+insert into Dormitory values ('Harrison', '4050 Main St', 'Boiler Hall');
+insert into Dormitory values ('Hawkins', '4053 Main St', 'Turing Hall');

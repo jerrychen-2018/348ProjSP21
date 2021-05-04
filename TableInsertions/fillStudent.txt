@@ -1,0 +1,8 @@
+drop table Student;
+create table Student(student_id integer, stu_name varchar(32), grade_level varchar(32), gpa double, dormitory_name varchar(32), classification varchar(32), advisor varchar(32), primary key(student_id));
+insert into Student values (0, 'Tom Riddle' , 'Freshman', 3.6, 'Shreve', 'undergraduate', 'Ryan Lincoln');
+insert into Student values (1, 'Ryan Wirth' , 'Junior', 2.5, 'Harrison', 'undergraduate', 'Addison Sheldon');
+insert into Student values (2, 'Anna Pucket', 'Sophmore', 3.2, 'Harrison', 'undergraduate', 'Aaron Akins');
+insert into Student values (3, 'Nathan Black', 'Senior', 3.8, 'Wiley', 'graduate', 'Catherine Smith');
+insert into Student values (4, 'Tony Navaro', 'Junior', 2.3, 'Shreve', 'undergraduate', 'Ryan Lincoln');
+insert into Student values (5, 'Rose Angle', 'Senior', 3.3, 'Wiley', 'undergraduate', 'Grant Henry');
