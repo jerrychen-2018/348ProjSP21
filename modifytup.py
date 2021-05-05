@@ -2,9 +2,9 @@ import tkinter as tk
 import mysql.connector
 from tkinter import *
 
-# Finished: Update functions for Student, Faculty, Course
+# Finished: Update functions for Student, Faculty, Course, Building
 # TODO: CourseSection, Building, Classroom, Club, Department, Dormitory
-
+# What if a ID doesn't exist in table? -> need to error-check
 
 def connect():
     cnx = mysql.connector.connect(user='root', password='rohanjerrytroy',
@@ -35,6 +35,7 @@ def modify_home(root):
     clicked.set("Select Table")
     drop = OptionMenu(root, clicked, *table_options).grid(row=2, column=5)
     myButton = tk.Button(root, text="Confirm Selection", command=lambda: change_page(clicked.get())).grid(row=2, column=6)
+
 
 def student_page(root):
     id_var = tk.StringVar()
@@ -258,6 +259,79 @@ def commit_course_update(id, new_name_var, new_dept_var):
     new_name_var.set("")
     new_dept_var.set("")
 
+
+def b_page(root):
+    id_var = tk.StringVar()
+
+    id_label = tk.Label(root, text='Please enter the current name of the building to be updated:',
+                        font=('calibre', 10, 'bold')).grid(row=1, column=0)
+    id_entry = tk.Entry(root, textvariable=id_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
+
+    sub_btn = tk.Button(root, text='Submit', command=lambda: update_building(id_var)).grid(row=2, column=1)
+    back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=1, column=6)
+
+
+def update_building(id_var):
+    for widget in temp_root.winfo_children():
+        widget.destroy()
+    id = id_var.get()
+    if (id == ""):
+        # TODO print message about valid args
+        change_page("back")
+
+    new_name_var = tk.StringVar()
+    new_add_var = tk.StringVar()
+
+    new_name_label = tk.Label(temp_root, text='New Course Name', font=('calibre', 10, 'bold')).grid(row=0, column=0)
+    new_name_entry = tk.Entry(temp_root, textvariable=new_name_var, font=('calibre', 10, 'normal')).grid(row=0, column=1)
+    new_add_label = tk.Label(temp_root, text='New Department', font=('calibre', 10, 'bold')).grid(row=1, column=0)
+    new_add_entry = tk.Entry(temp_root, textvariable=new_add_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
+    desc_label = tk.Label(temp_root, text='(Fields left blank will not modify the attribute)', font=('calibre', 10, 'normal')).grid(row=2, column=0)
+    sub_btn = tk.Button(temp_root, text='Submit', command=lambda: commit_building_update(id, new_name_var, new_add_var)).grid(row=2, column=1)
+    back_btn = tk.Button(temp_root, text="Back", command=lambda: change_page("back")).grid(row=1, column=6)
+
+
+def commit_building_update(id, new_name_var, new_add_var):
+    new_name = new_name_var.get()
+    new_add = new_add_var.get()
+
+    if (new_name == "" and new_add == ""):
+        # TODO print message about valid args
+        change_page("back")
+    else:
+        cnx = connect()
+        cursor = cnx.cursor()
+        if (new_name == ""):
+            data = (new_add, id)
+            update = ("UPDATE Building "
+                      "SET address = %s "
+                      "WHERE building_name = %s")
+        elif (new_add == ""):
+            data = (new_name, id)
+            update = ("UPDATE Building "
+                      "SET building_name = %s "
+                      "WHERE building_name = %s")
+        else:
+            data = (new_name, new_add, id)
+            update = ("UPDATE Building "
+                      "SET building_name = %s, address = %s "
+                      "WHERE building_name = %s")
+        cursor.execute(update, data)
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+
+    new_name_var.set("")
+    new_add_var.set("")
+
+
+def dorm_page(root):
+
+
+def update_dorm():
+
+
+def commit_dorm_update():
 
 def change_page(table):
     for widget in temp_root.winfo_children():
