@@ -1,0 +1,8 @@
+drop table Course;
+create table Course(course_id int NOT NULL AUTO_INCREMENT, course_name varchar(32), department varchar(32), Primary Key(course_id));
+Insert into Course (course_name, department) Values ("MA101", "Mathematics");
+Insert into Course (course_name, department) Values ("CHM101", "Chemistry");
+Insert into Course (course_name, department) Values ("MA201", "Mathematics");
+Insert into Course (course_name, department) Values ("CHM201", "Chemistry");
+Insert into Course (course_name, department) Values ("CS408", "Computer Science");
+Insert into Course (course_name, department) Values ("CS448", "Computer Science");

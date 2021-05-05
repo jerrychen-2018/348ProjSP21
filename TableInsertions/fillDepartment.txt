@@ -1,0 +1,7 @@
+drop table Department;
+create table Department(dept_name varchar(32), chair varchar(32), building varchar(32), Primary Key(dept_name));
+Insert into Department Values ("Computer Science", "Dongyan Xu", "LWSN");
+Insert into Department Values ("English", "Dorsey Armstrong", "HEAV");
+Insert into Department Values ("Information Technology", "Thomas Hacker", "KNOY");
+Insert into Department Values ("Mathematics", "Irena Swanson", "MATH");
+Insert into Department Values ("Physics", "John Finley", "PHYS");

@@ -3,6 +3,7 @@ import modifytup as modify
 import deletetup as delete
 import querytup as query
 import reportstup as reports
+import viewtup as view
 import tkinter as tk
 
 
