@@ -4,7 +4,6 @@ from tkinter import *
 import main as main
 
 
-
 def connect():
     cnx = mysql.connector.connect(user='root', password='rohanjerrytroy',
                                   host='35.224.65.220',
@@ -42,23 +41,21 @@ def student_page(root):
         id_label = tk.Label(root, text='Student ID', font=('calibre', 10, 'bold')).grid(row=0, column=0)
         id_entry = tk.Entry(root, textvariable=id_var, font=('calibre', 10, 'normal')).grid(row=0, column=1)
 
-        sub_btn = tk.Button(root, text='DELETE', command=lambda: delete_student(id_var)).grid(row=2, column=1)
+        sub_btn = tk.Button(root, text='DELETE', command=lambda: delete_student(id_var)).grid(row=1, column=1)
         back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
 
 def delete_student(id_var):
     if(len(id_var.get()) == 0):
-        # TODO print message about valid args
-        change_page("back")
-        return
+       # TODO print message about valid args
+      change_page("back")
+      return
 
     id = id_var.get()
 
     cnx = connect()
     cursor = cnx.cursor()
-    student_data = (id)
-    deletion = ("delete "
-                 "from Student "
-                 "where student_id = %s")
+    student_data = (id,)
+    deletion = ("DELETE FROM Student WHERE student_id = %s")
     cursor.execute(deletion, student_data)
     cnx.commit()
     cursor.close()
@@ -73,7 +70,7 @@ def faculty_page(root):
     id_label = tk.Label(root, text='Faculty ID', font=('calibre', 10, 'bold')).grid(row=0, column=0)
     id_entry = tk.Entry(root, textvariable=id_var, font=('calibre', 10, 'normal')).grid(row=0, column=1)
 
-    sub_btn2 = tk.Button(root, text='DELETE', command=lambda: delete_faculty(id_var).grid(row=7, column=1))
+    sub_btn = tk.Button(root, text='DELETE', command=lambda: delete_faculty(id_var)).grid(row=1, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
 
 
@@ -87,7 +84,7 @@ def delete_faculty(id_var):
 
     cnx = connect()
     cursor = cnx.cursor()
-    faculty_data = (id)
+    faculty_data = (id,)
     deletion = ("delete "
                 "from Faculty "
                 "where fac_id = %s) ")
@@ -107,7 +104,7 @@ def dormitory_page(root):
     name_entry = tk.Entry(root, textvariable=name_var, font=('calibre', 10, 'normal')).grid(row=0, column=1)
 
     sub_btn = tk.Button(root, text='DELETE',
-                        command=lambda: delete_dormitory(name_var).grid(row=7, column=1))
+                        command=lambda: delete_dormitory(name_var)).grid(row=1, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
 
 
@@ -121,7 +118,7 @@ def delete_dormitory(name_var):
 
     cnx = connect()
     cursor = cnx.cursor()
-    dormitory_data = (name)
+    dormitory_data = (name,)
     deletion = ("delete "
                 "from Dormitory "
                 "where name = %s) ")
@@ -141,7 +138,7 @@ def course_page(root):
     id_entry = tk.Entry(root, textvariable=id_var, font=('calibre', 10, 'normal')).grid(row=0, column=1)
 
     sub_btn = tk.Button(root, text='DELETE',
-                        command=lambda: delete_course(id_var).grid(row=7, column=1))
+                        command=lambda: delete_course(id_var)).grid(row=1, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
 
 
@@ -155,7 +152,7 @@ def delete_course(id_var):
 
     cnx = connect()
     cursor = cnx.cursor()
-    course_data = (id)
+    course_data = (id,)
     deletion = ("delete "
                 "from Course "
                 "where id = %s) ")
@@ -181,7 +178,7 @@ def course_section_page(root):
 
     sub_btn = tk.Button(root, text='DELETE',
                         command=lambda: delete_course_section(sec_id_var, course_id_var).grid(row=7, column=1))
-    back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
+    back_btn = tk.Button(root, text="Back", command=lambda: change_page("back").grid(row=2, column=6))
 
 
 def delete_course_section(sec_id_var, course_id_var, instr_id_var, building_var):
@@ -216,7 +213,7 @@ def department_page(root):
     name_entry = tk.Entry(root, textvariable=name_var, font=('calibre', 10, 'normal')).grid(row=0, column=1)
 
     sub_btn = tk.Button(root, text='DELETE',
-                        command=lambda: delete_department(name_var).grid(row=7, column=1))
+                        command=lambda: delete_department(name_var)).grid(row=1, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
 
 
@@ -230,7 +227,7 @@ def delete_department(name_var):
 
     cnx = connect()
     cursor = cnx.cursor()
-    department_data = (name)
+    department_data = (name,)
     deletion = ("delete "
                 "from Department "
                 "where id = %s) ")
@@ -252,11 +249,11 @@ def classroom_page(root):
     name_label = tk.Label(root, text='Room Number', font=('calibre', 10, 'bold')).grid(row=0, column=0)
     name_entry = tk.Entry(root, textvariable=room_var, font=('calibre', 10, 'normal')).grid(row=0, column=1)
 
-    building_label = tk.Label(root, text='Building', font=('calibre', 10, 'bold')).grid(row=2, column=0)
-    building_entry = tk.Entry(root, textvariable=building_var, font=('calibre', 10, 'normal')).grid(row=2, column=1)
+    building_label = tk.Label(root, text='Building', font=('calibre', 10, 'bold')).grid(row=1, column=0)
+    building_entry = tk.Entry(root, textvariable=building_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
 
     sub_btn = tk.Button(root, text='DELETE',
-                        command=lambda: delete_classroom(room_var, building_var).grid(row=7, column=1))
+                        command=lambda: delete_classroom(room_var, building_var)).grid(row=2, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
 
 
@@ -291,7 +288,7 @@ def club_page(root):
     name_entry = tk.Entry(root, textvariable=name_var, font=('calibre', 10, 'normal')).grid(row=0, column=1)
 
     sub_btn = tk.Button(root, text='DELETE',
-                        command=lambda: delete_club(name_var).grid(row=7, column=1))
+                        command=lambda: delete_club(name_var)).grid(row=1, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
 
 
@@ -305,7 +302,7 @@ def delete_club(name_var):
 
     cnx = connect()
     cursor = cnx.cursor()
-    club_data = (name)
+    club_data = (name,)
     deletion = ("delete "
                 "from Club "
                 "where club_name = %s) ")
@@ -325,7 +322,7 @@ def building_page(root):
     name_entry = tk.Entry(root, textvariable=name_var, font=('calibre', 10, 'normal')).grid(row=0, column=1)
 
     sub_btn = tk.Button(root, text='DELETE',
-                        command=lambda: delete_building(name_var).grid(row=7, column=1))
+                        command=lambda: delete_building(name_var)).grid(row=1, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
 
 
@@ -339,7 +336,7 @@ def delete_building(name_var):
 
     cnx = connect()
     cursor = cnx.cursor()
-    building_data = (name)
+    building_data = (name,)
     deletion = ("delete "
                 "from Building "
                 "where building_name = %s) ")

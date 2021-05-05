@@ -1,156 +1,358 @@
-import tkinter as tk
+# file created by Rohan Shankar
 import mysql.connector
-from tkinter import *
+import tkinter as tk;
+
+window = tk.Tk()
+mystring = tk.StringVar(window)
+
+width = window.winfo_screenwidth()
+height = window.winfo_screenheight()
+window.geometry("%dx%d" % (width, height))
+window.title("School System Stored Procedures")
+
+frame = tk.LabelFrame(window)
+frame.grid(row=0, column=1)
 
 
+def disableAllButtons():
+    button1['state'] = 'disabled'
+    button2['state'] = 'disabled'
+    button3['state'] = 'disabled'
+    button4['state'] = 'disabled'
+    button5['state'] = 'disabled'
+    button6['state'] = 'disabled'
+    button7['state'] = 'disabled'
+    button8['state'] = 'disabled'
 
-def connect():
+
+def clear():
+    for widget in frame.winfo_children():
+        widget.destroy()
+    frame.grid_remove()
+    button1['state'] = 'normal'
+    button2['state'] = 'normal'
+    button3['state'] = 'normal'
+    button4['state'] = 'normal'
+    button5['state'] = 'normal'
+    button6['state'] = 'normal'
+    button7['state'] = 'normal'
+    button8['state'] = 'normal'
+
+
+def clickButton():
+    disableAllButtons()
+    frame.grid()
+    prompt = tk.Label(frame, text="        Which class?")
+    prompt.grid(row=0, column=2)
+    courseName = tk.Entry(frame, textvariable=mystring)
+    courseName.grid(row=0, column=3)
+    eButton = tk.Button(frame, text='Enter', width=15, command=getQuery1)
+    eButton.grid(row=0, column=4)
+
+
+def clickButton2():
+    disableAllButtons()
+    frame.grid()
+    prompt = tk.Label(frame, text="        Which class?")
+    prompt.grid(row=0, column=2)
+    courseName = tk.Entry(frame, textvariable=mystring)
+    courseName.grid(row=0, column=3)
+    eButton = tk.Button(frame, text='Enter', width=15, command=getQuery2)
+    eButton.grid(row=0, column=4)
+
+
+def clickButton3():
+    disableAllButtons()
+    frame.grid()
+    getQuery3()
+
+
+def clickButton4():
+    disableAllButtons()
+    frame.grid()
+    getQuery4()
+
+
+def clickButton5():
+    disableAllButtons()
+    frame.grid()
+    prompt = tk.Label(frame, text="        Which professor?")
+    prompt.grid(row=0, column=2)
+    courseName = tk.Entry(frame, textvariable=mystring)
+    courseName.grid(row=0, column=3)
+    eButton = tk.Button(frame, text='Enter', width=15, command=getQuery5)
+    eButton.grid(row=0, column=4)
+
+
+def clickButton6():
+    disableAllButtons()
+    frame.grid()
+    prompt = tk.Label(frame, text="        Which professor?")
+    prompt.grid(row=0, column=2)
+    courseName = tk.Entry(frame, textvariable=mystring)
+    courseName.grid(row=0, column=3)
+    eButton = tk.Button(frame, text='Enter', width=15, command=getQuery6)
+    eButton.grid(row=0, column=4)
+
+
+def clickButton7():
+    disableAllButtons()
+    frame.grid()
+    prompt = tk.Label(frame, text="        Enter a student id")
+    prompt.grid(row=0, column=2)
+    courseName = tk.Entry(frame, textvariable=mystring)
+    courseName.grid(row=0, column=3)
+    eButton = tk.Button(frame, text='Enter', width=15, command=getQuery7)
+    eButton.grid(row=0, column=4)
+
+
+def clickButton8():
+    frame.grid()
     cnx = mysql.connector.connect(user='root', password='rohanjerrytroy',
                                   host='35.224.65.220',
                                   database='schoolsystem')
-    return cnx
-
-def reports_home(root):
-    global temp_root
-    temp_root = root
-    for widget in root.winfo_children():
-        widget.destroy()
-
-    table_options = [
-        "Student",
-        "Faculty",
-        "Course"
-    ]
-
-    clicked = tk.StringVar()
-    clicked.set("Select Table")
-    drop = OptionMenu(root, clicked, *table_options).grid(row=2, column=5)
-    myButton = tk.Button(root, text="Confirm Selection", command=lambda: change_page(clicked.get())).grid(row=2, column=6)
-
-def student_page(root):
-        id_var = tk.StringVar()
-        name_var = tk.StringVar()
-        grade_var = tk.StringVar()
-        gpa_var = tk.StringVar()
-        dorm_var = tk.StringVar()
-        classification_var = tk.StringVar()
-        adviser_var = tk.StringVar()
-
-        id_label = tk.Label(root, text='Student ID', font=('calibre', 10, 'bold')).grid(row=0, column=0)
-        id_entry = tk.Entry(root, textvariable=id_var, font=('calibre', 10, 'normal')).grid(row=0, column=1)
-
-        name_label = tk.Label(root, text='Name', font=('calibre', 10, 'bold')).grid(row=1, column=0)
-        name_entry = tk.Entry(root, textvariable=name_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
-
-        grade_label = tk.Label(root, text='Grade', font=('calibre', 10, 'bold')).grid(row=2, column=0)
-        grade_entry = tk.Entry(root, textvariable=grade_var, font=('calibre', 10, 'normal')).grid(row=2, column=1)
-
-        gpa_label = tk.Label(root, text='GPA', font=('calibre', 10, 'bold')).grid(row=3, column=0)
-        gpa_entry = tk.Entry(root, textvariable=gpa_var, font=('calibre', 10, 'normal')).grid(row=3, column=1)
-
-        dorm_label = tk.Label(root, text='Dormitory', font=('calibre', 10, 'bold')).grid(row=4, column=0)
-        dorm_entry = tk.Entry(root, textvariable=dorm_var, font=('calibre', 10, 'normal')).grid(row=4, column=1)
-
-        classification_label = tk.Label(root, text='Classification', font=('calibre', 10, 'bold')).grid(row=5, column=0)
-        classification_entry = tk.Entry(root, textvariable=classification_var, font=('calibre', 10, 'normal')).grid(
-            row=5, column=1)
-
-        adviser_label = tk.Label(root, text='Advisor', font=('calibre', 10, 'bold')).grid(row=6, column=0)
-        adviser_entry = tk.Entry(root, textvariable=adviser_var, font=('calibre', 10, 'normal')).grid(row=6, column=1)
-        sub_btn = tk.Button(root, text='ADD', command=lambda: insert_student(id_var, name_var, grade_var, gpa_var, dorm_var, classification_var, adviser_var)).grid(row=7, column=1)
-        back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
-
-def insert_student(id_var, name_var, grade_var, gpa_var, dorm_var, classification_var, adviser_var):
-    id = id_var.get()
-    name = name_var.get()
-    grade = grade_var.get()
-    gpa = gpa_var.get()
-    dorm = dorm_var.get()
-    classification = classification_var.get()
-    adviser = adviser_var.get()
-
-    if(id == "" or name == "" or grade == "" or gpa == "" or dorm == "" or classification == "" or adviser == ""):
-        #TODO print message about valid args
-        change_page("back")
-
-
-    cnx = connect()
     cursor = cnx.cursor()
-    student_data = (id, name, grade, gpa, dorm, classification, adviser)
-    insertion = ("INSERT INTO Student "
-                 "(student_id, stu_name, grade_level, gpa, dormitory_name, classification, advisor) "
-                 "VALUES (%s, %s, %s, %s, %s, %s, %s)")
-    cursor.execute(insertion, student_data)
+    query = "drop index idx1 on Course;"
+    cursor.execute(query)
+    query = "drop index idx2 on Faculty;"
+    cursor.execute(query)
+    query = "create index idx1 on Course(course_name);"
+    cursor.execute(query)
+    query = "create index idx2 on Faculty(faculty_name);"
+    cursor.execute(query)
+    outputSuccess = tk.Label(frame, text="Index Creation Successful!")
+    outputSuccess.grid(row=0, column=2)
+
+
+def getQuery1():
+    cName = mystring.get()
+    print("cName is " + cName)
+
+    cnx = mysql.connector.connect(user='root', password='rohanjerrytroy',
+                                  host='35.224.65.220',
+                                  database='schoolsystem')
+    cursor = cnx.cursor(prepared=True)
+
+    query = "select s.stu_name, c.course_name from EnrolledIn e, Student s, Course c  where e.course_id = c.course_id and e.student_id = s.student_id and course_name = %s"
+
+    cursor.execute(query, (cName,))
+    i = 0
+    j = 5
+    s_nameLabel = tk.Label(frame, text="student_name   ", font='Helvetica 18 bold')
+    s_nameLabel.grid(row=i, column=j)
+    c_nameLabel = tk.Label(frame, text="course_name", font='Helvetica 18 bold')
+    c_nameLabel.grid(row=0, column=j + 1)
+    for (student_name, course_name) in cursor:
+        s_name = tk.Label(frame, text=student_name)
+        s_name.grid(row=i + 1, column=j)
+        c_name = tk.Label(frame, text=course_name)
+        c_name.grid(row=i + 1, column=j + 1)
+        i = i + 1
+        print(i)
+        print(j)
+
     cnx.commit()
     cursor.close()
     cnx.close()
 
-    id_var.set("")
-    name_var.set("")
-    grade_var.set("")
-    gpa_var.set("")
-    dorm_var.set("")
-    classification_var.set("")
-    adviser_var.set("")
 
-def faculty_page(root):
-    id_var = tk.StringVar()
-    name_var = tk.StringVar()
-    salary_var = tk.StringVar()
-    phone_var = tk.StringVar()
+def getQuery2():
+    cName = mystring.get()
+    print("cName is " + cName)
+    cnx = mysql.connector.connect(user='root', password='rohanjerrytroy',
+                                  host='35.224.65.220',
+                                  database='schoolsystem')
+    cursor = cnx.cursor(prepared=True)
+    query = "select distinct f.faculty_name, c.course_name from Faculty f, Course c, CourseSection cs where c.course_id = cs.course_id and f.fac_id = cs.instructor_id and c.course_name = %s"
+    print(query)
+    cursor.execute(query, (cName,))
+    i = 0
+    j = 5
+    s_nameLabel = tk.Label(frame, text="faculty_name   ", font='Helvetica 18 bold')
+    s_nameLabel.grid(row=i, column=j)
+    c_nameLabel = tk.Label(frame, text="course_name", font='Helvetica 18 bold')
+    c_nameLabel.grid(row=0, column=j + 1)
+    for (student_name, course_name) in cursor:
+        s_name = tk.Label(frame, text=student_name)
+        s_name.grid(row=i + 1, column=j)
+        c_name = tk.Label(frame, text=course_name)
+        c_name.grid(row=i + 1, column=j + 1)
+        i = i + 1
+        print(i)
+        print(j)
 
-    id_label = tk.Label(root, text='Student ID', font=('calibre', 10, 'bold')).grid(row=0, column=0)
-    id_entry = tk.Entry(root, textvariable=id_var, font=('calibre', 10, 'normal')).grid(row=0, column=1)
-
-    name_label = tk.Label(root, text='Name', font=('calibre', 10, 'bold')).grid(row=1, column=0)
-    name_entry = tk.Entry(root, textvariable=name_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
-
-    salary_label = tk.Label(root, text='Salary', font=('calibre', 10, 'bold')).grid(row=2, column=0)
-    salary_entry = tk.Entry(root, textvariable=salary_var, font=('calibre', 10, 'normal')).grid(row=2, column=1)
-
-    phone_label = tk.Label(root, text='phone', font=('calibre', 10, 'bold')).grid(row=3, column=0)
-    phone_entry = tk.Entry(root, textvariable=phone_var, font=('calibre', 10, 'normal')).grid(row=3, column=1)
-
-    sub_btn = tk.Button(root, text='ADD',
-                        command=lambda: insert_faculty(id_var, name_var, salary_var, phone_var).grid(row=7, column=1))
-    back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
-
-
-def insert_faculty(id_var, name_var, salary_var, phone_var):
-    id = id_var.get()
-    name = name_var.get()
-    salary = salary_var.get()
-    phone = phone_var.get()
-    if(id == "" or name == "" or salary == "" or phone == ""):
-        #TODO print message about valid args
-        change_page("back")
-
-
-    cnx = connect()
-    cursor = cnx.cursor()
-    faculty_data = (id, name, salary, phone)
-    insertion = ("INSERT INTO Facultly "
-                 "(student_id, stu_name, grade_level, gpa, dormitory_name, classification, advisor)"
-                 "VALUES (%s, %s, %s, %s, %s, %s, %s)")
-    cursor.execute(insertion, faculty_data)
     cnx.commit()
     cursor.close()
     cnx.close()
 
-    id_var.set("")
-    name_var.set("")
-    salary_var.set("")
-    phone_var.set("")
+
+def getQuery3():
+    cnx = mysql.connector.connect(user='root', password='rohanjerrytroy',
+                                  host='35.224.65.220',
+                                  database='schoolsystem')
+    cursor = cnx.cursor(prepared=True)
+    query = "select s.stu_name, bt.club_name from Student s, BelongsTo bt where s.student_id = bt.student_id;"
+    print(query)
+    cursor.execute(query)
+    i = 0
+    j = 5
+    s_nameLabel = tk.Label(frame, text="Output:", font='Helvetica 18 bold')
+    s_nameLabel.grid(row=i, column=j)
+    for (student_name, course_name) in cursor:
+        s_name = tk.Label(frame, text=student_name)
+        s_name.grid(row=i + 1, column=j)
+        c_name = tk.Label(frame, text=course_name)
+        c_name.grid(row=i + 1, column=j + 1)
+        i = i + 1
+        print(i)
+        print(j)
+
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+    print(query)
+    cursor.execute(query)
+    i = 0
+    j = 5
+    s_nameLabel = tk.Label(frame, text="Output:", font='Helvetica 18 bold')
+    s_nameLabel.grid(row=i, column=j)
+    for (student_name, course_name) in cursor:
+        s_name = tk.Label(frame, text=student_name)
+        s_name.grid(row=i + 1, column=j)
+        c_name = tk.Label(frame, text=course_name)
+        c_name.grid(row=i + 1, column=j + 1)
+        i = i + 1
+        print(i)
+        print(j)
+
+    cnx.commit()
+    cursor.close()
+    cnx.close()
 
 
-def change_page(table):
-    for widget in temp_root.winfo_children():
-        widget.destroy()
-    if table == "back":
-            delete_home(temp_root)
-    elif table == "Student":
-        student_page(temp_root)
-    elif table == "Faculty":
-        faculty_page(temp_root)
-    #elif table == "Course":
-    #    course_page(temp_root)
+def getQuery4():
+    # print("cName is " +  mystring.get())
+    cnx = mysql.connector.connect(user='root', password='rohanjerrytroy',
+                                  host='35.224.65.220',
+                                  database='schoolsystem')
+    cursor = cnx.cursor(prepared=True)
+    query = "select dorm_name, dining_hall from Dormitory where dining_hall <> 'NULL';"
+    print(query)
+    cursor.execute(query)
+    i = 0
+    j = 5
+    s_nameLabel = tk.Label(frame, text="Output:", font='Helvetica 18 bold')
+    s_nameLabel.grid(row=i, column=j)
+    for (student_name, course_name) in cursor:
+        s_name = tk.Label(frame, text=student_name)
+        s_name.grid(row=i + 1, column=j)
+        c_name = tk.Label(frame, text=course_name)
+        c_name.grid(row=i + 1, column=j + 1)
+        i = i + 1
+        print(i)
+        print(j)
+
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+
+
+def getQuery5():
+    cName = mystring.get()
+    print("cName is " + cName)
+    cnx = mysql.connector.connect(user='root', password='rohanjerrytroy',
+                                  host='35.224.65.220',
+                                  database='schoolsystem')
+    cursor = cnx.cursor(prepared=True)
+    query = "select distinct cs.section_id, c.course_name from Faculty f, Course c, CourseSection cs where c.course_id = cs.course_id and f.fac_id = cs.instructor_id and f.faculty_name = %s"
+    print(query)
+    cursor.execute(query, (cName,))
+    i = 0
+    j = 5
+    s_nameLabel = tk.Label(frame, text="section_id   ", font='Helvetica 18 bold')
+    s_nameLabel.grid(row=i, column=j)
+    c_nameLabel = tk.Label(frame, text="course_name", font='Helvetica 18 bold')
+    c_nameLabel.grid(row=0, column=j + 1)
+    for (student_name, course_name) in cursor:
+        s_name = tk.Label(frame, text=student_name)
+        s_name.grid(row=i + 1, column=j)
+        c_name = tk.Label(frame, text=course_name)
+        c_name.grid(row=i + 1, column=j + 1)
+        i = i + 1
+        print(i)
+        print(j)
+
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+
+
+def getQuery6():
+    cName = mystring.get()
+    cnx = mysql.connector.connect(user='root', password='rohanjerrytroy',
+                                  host='35.224.65.220',
+                                  database='schoolsystem')
+    cursor = cnx.cursor()
+    query = "call RateAProfessor(%s, @rating);"
+    query2 = "select @rating as Rating;"
+    print(query)
+    cursor.execute(query, (cName,))
+    cursor.execute(query2)
+    i = 0
+    j = 5
+    s_nameLabel = tk.Label(frame, text="Output:", font='Helvetica 18 bold')
+    s_nameLabel.grid(row=i, column=j)
+    for (student_name) in cursor:
+        s_name = tk.Label(frame, text=student_name)
+        s_name.grid(row=i + 1, column=j)
+
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+
+
+def getQuery7():
+    cName = mystring.get()
+    cnx = mysql.connector.connect(user='root', password='rohanjerrytroy',
+                                  host='35.224.65.220',
+                                  database='schoolsystem')
+    cursor = cnx.cursor()
+    query = "call RateMyCourses(%s, @r);"
+    query2 = "select @r as 'Your Course Ratings';"
+    print(query)
+    cursor.execute(query, (cName,))
+    cursor.execute(query2)
+    i = 0
+    j = 5
+    s_nameLabel = tk.Label(frame, text="Output:", font='Helvetica 18 bold')
+    s_nameLabel.grid(row=i, column=j)
+    for (student_name) in cursor:
+        s_name = tk.Label(frame, text=student_name)
+        s_name.grid(row=i + 1, column=j)
+
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+
+
+button1 = tk.Button(window, text="1) Get all names of students in a specific class", command=clickButton)
+button2 = tk.Button(window, text="2) Get all professors teaching a specific course", command=clickButton2)
+button3 = tk.Button(window, text="3) Get names of all students that are club leaders", command=clickButton3)
+button4 = tk.Button(window, text="4) List which dorms have dining halls", command=clickButton4)
+button5 = tk.Button(window, text="5) See how many individual courses a professor is teaching", command=clickButton5)
+button6 = tk.Button(window, text="6) Rate a Professor's Difficulty", command=clickButton6)
+button7 = tk.Button(window, text="7) Rate my Courses", command=clickButton7)
+button8 = tk.Button(window, text="8) Create indexes", command=clickButton8)
+clearButton = tk.Button(window, text="Clear", command=clear)
+
+button1.grid(row=0, column=0)
+button2.grid(row=1, column=0)
+button3.grid(row=2, column=0)
+button4.grid(row=3, column=0)
+button5.grid(row=4, column=0)
+button6.grid(row=5, column=0)
+button7.grid(row=6, column=0)
+button8.grid(row=7, column=0)
+clearButton.grid(row=9, column=0)
+
+window.mainloop()

@@ -1,8 +1,8 @@
 drop table Faculty;
-create table Faculty(fac_id integer, faculty_name varchar(32), department varchar(32), salary integer, phone_number varchar(32), office varchar(32), building varchar(32), primary key(fac_id));
-insert into Faculty values (0, 'Eli Brooks', 'Literature', 56000, '8123781991', 'officeLit', 'building0');
-insert into Faculty values (1, 'Nick Shedd', 'Medicine', 97000, '6034476565', 'officeMed', 'building0');
-insert into Faculty values (2, 'Andrew Scott',  'Engineering', 93500, '1836492846', 'officeEng', 'building1');
-insert into Faculty values (3, 'Damon Hunter',  'Medicine', 87000, '1538462067', 'officeMed', 'building0');
-insert into Faculty values (4, 'Addie Smith',  'Arts', 56000, '8127001827', 'officeArt', 'building2');
-insert into Faculty values (5, 'Mackenzie Walls',  'Law', 102000, '7337239188', 'officeLaw', 'building2');
+create table Faculty(fac_id integer NOT NULL AUTO_INCREMENT, faculty_name varchar(32), department varchar(32), salary integer, phone_number varchar(32), office varchar(32), building varchar(32), primary key(fac_id));
+insert into Faculty (faculty_name, department, salary, phone_number, office, building) values ('Eli Brooks', 'Literature', 56000, '8123781991', 'officeLit', 'building0');
+insert into Faculty (faculty_name, department, salary, phone_number, office, building) values ('Nick Shedd', 'Medicine', 97000, '6034476565', 'officeMed', 'building0');
+insert into Faculty (faculty_name, department, salary, phone_number, office, building) values ('Andrew Scott',  'Engineering', 93500, '1836492846', 'officeEng', 'building1');
+insert into Faculty (faculty_name, department, salary, phone_number, office, building) values ('Damon Hunter',  'Medicine', 87000, '1538462067', 'officeMed', 'building0');
+insert into Faculty (faculty_name, department, salary, phone_number, office, building) values ('Addie Smith',  'Arts', 56000, '8127001827', 'officeArt', 'building2');
+insert into Faculty (faculty_name, department, salary, phone_number, office, building) values ('Mackenzie Walls',  'Law', 102000, '7337239188', 'officeLaw', 'building2');

@@ -128,7 +128,7 @@ def faculty_page(root):
     building_label = tk.Label(root, text='Building', font=('calibre', 10, 'bold')).grid(row=6, column=0)
     building_entry = tk.Entry(root, textvariable=name_var, font=('calibre', 10, 'normal')).grid(row=6, column=1)
 
-    sub_btn2 = tk.Button(root, text='ADD', command=lambda: insert_faculty(id_var, name_var, dept_var, salary_var, phone_var, office_var, building_var).grid(row=7, column=1))
+    sub_btn = tk.Button(root, text='ADD', command=lambda: insert_faculty(id_var, name_var, dept_var, salary_var, phone_var, office_var, building_var)).grid(row=7, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
 
 
@@ -177,7 +177,7 @@ def dormitory_page(root):
     address_entry = tk.Entry(root, textvariable=address_var, font=('calibre', 10, 'normal')).grid(row=2, column=1)
 
     sub_btn = tk.Button(root, text='ADD',
-                        command=lambda: insert_dormitory(name_var, dining_var, address_var).grid(row=7, column=1))
+                        command=lambda: insert_dormitory(name_var, dining_var, address_var)).grid(row=3, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
 
 
@@ -221,7 +221,7 @@ def course_page(root):
     dept_entry = tk.Entry(root, textvariable=dept_var, font=('calibre', 10, 'normal')).grid(row=2, column=1)
 
     sub_btn = tk.Button(root, text='ADD',
-                        command=lambda: insert_course(id_var, name_var, dept_var).grid(row=7, column=1))
+                        command=lambda: insert_course(id_var, name_var, dept_var)).grid(row=3, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
 
 
@@ -270,7 +270,7 @@ def course_section_page(root):
     building_entry = tk.Entry(root, textvariable=building_var, font=('calibre', 10, 'normal')).grid(row=3, column=1)
 
     sub_btn = tk.Button(root, text='ADD',
-                        command=lambda: insert_course_section(sec_id_var, course_id_var, instr_id_var, building_var).grid(row=7, column=1))
+                        command=lambda: insert_course_section(sec_id_var, course_id_var, instr_id_var, building_var)).grid(row=4, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
 
 
@@ -317,7 +317,7 @@ def department_page(root):
     building_entry = tk.Entry(root, textvariable=building_var, font=('calibre', 10, 'normal')).grid(row=2, column=1)
 
     sub_btn = tk.Button(root, text='ADD',
-                        command=lambda: insert_department(name_var, chair_var, building_var).grid(row=7, column=1))
+                        command=lambda: insert_department(name_var, chair_var, building_var)).grid(row=3, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
 
 
@@ -362,7 +362,7 @@ def classroom_page(root):
     cap_entry = tk.Entry(root, textvariable=cap_var, font=('calibre', 10, 'normal')).grid(row=3, column=1)
 
     sub_btn = tk.Button(root, text='ADD',
-                        command=lambda: insert_classroom(room_var, building_var, cap_var).grid(row=7, column=1))
+                        command=lambda: insert_classroom(room_var, building_var, cap_var)).grid(row=4, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
 
 
@@ -412,7 +412,7 @@ def club_page(root):
     building_entry = tk.Entry(root, textvariable=building_var, font=('calibre', 10, 'normal')).grid(row=3, column=1)
 
     sub_btn = tk.Button(root, text='ADD',
-                        command=lambda: insert_club(name_var, sup_id_var, funding_var, building_var).grid(row=7, column=1))
+                        command=lambda: insert_club(name_var, sup_id_var, funding_var, building_var)).grid(row=4, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
 
 
@@ -458,7 +458,7 @@ def building_page(root):
     handi_entry = tk.Entry(root, textvariable=handi_var, font=('calibre', 10, 'normal')).grid(row=2, column=1)
 
     sub_btn = tk.Button(root, text='ADD',
-                        command=lambda: insert_building(name_var, address_var, handi_var).grid(row=7, column=1))
+                        command=lambda: insert_building(name_var, address_var, handi_var)).grid(row=3, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
 
 
