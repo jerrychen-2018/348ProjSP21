@@ -1,6 +1,7 @@
 import tkinter as tk
 import mysql.connector
 from tkinter import *
+import main as main
 
 
 
@@ -19,138 +20,361 @@ def delete_home(root):
     table_options = [
         "Student",
         "Faculty",
-        "Course"
+        "Dormitory",
+        "Course",
+        "CourseSection",
+        "Department",
+        "Classroom",
+        "Club",
+        "Building"
     ]
 
     clicked = tk.StringVar()
-    clicked.set("Select Table")
+    clicked.set(table_options[0])
     drop = OptionMenu(root, clicked, *table_options).grid(row=2, column=5)
     myButton = tk.Button(root, text="Confirm Selection", command=lambda: change_page(clicked.get())).grid(row=2, column=6)
+    back_btn = tk.Button(root, text="Back", command=lambda: change_page("main")).grid(row=2, column=7)
 
+#----- v Student page and deletion v --------
 def student_page(root):
         id_var = tk.StringVar()
-        name_var = tk.StringVar()
-        grade_var = tk.StringVar()
-        gpa_var = tk.StringVar()
-        dorm_var = tk.StringVar()
-        classification_var = tk.StringVar()
-        adviser_var = tk.StringVar()
 
         id_label = tk.Label(root, text='Student ID', font=('calibre', 10, 'bold')).grid(row=0, column=0)
         id_entry = tk.Entry(root, textvariable=id_var, font=('calibre', 10, 'normal')).grid(row=0, column=1)
 
-        name_label = tk.Label(root, text='Name', font=('calibre', 10, 'bold')).grid(row=1, column=0)
-        name_entry = tk.Entry(root, textvariable=name_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
-
-        grade_label = tk.Label(root, text='Grade', font=('calibre', 10, 'bold')).grid(row=2, column=0)
-        grade_entry = tk.Entry(root, textvariable=grade_var, font=('calibre', 10, 'normal')).grid(row=2, column=1)
-
-        gpa_label = tk.Label(root, text='GPA', font=('calibre', 10, 'bold')).grid(row=3, column=0)
-        gpa_entry = tk.Entry(root, textvariable=gpa_var, font=('calibre', 10, 'normal')).grid(row=3, column=1)
-
-        dorm_label = tk.Label(root, text='Dormitory', font=('calibre', 10, 'bold')).grid(row=4, column=0)
-        dorm_entry = tk.Entry(root, textvariable=dorm_var, font=('calibre', 10, 'normal')).grid(row=4, column=1)
-
-        classification_label = tk.Label(root, text='Classification', font=('calibre', 10, 'bold')).grid(row=5, column=0)
-        classification_entry = tk.Entry(root, textvariable=classification_var, font=('calibre', 10, 'normal')).grid(
-            row=5, column=1)
-
-        adviser_label = tk.Label(root, text='Advisor', font=('calibre', 10, 'bold')).grid(row=6, column=0)
-        adviser_entry = tk.Entry(root, textvariable=adviser_var, font=('calibre', 10, 'normal')).grid(row=6, column=1)
-        sub_btn = tk.Button(root, text='ADD', command=lambda: insert_student(id_var, name_var, grade_var, gpa_var, dorm_var, classification_var, adviser_var)).grid(row=7, column=1)
+        sub_btn = tk.Button(root, text='DELETE', command=lambda: delete_student(id_var)).grid(row=2, column=1)
         back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
 
-def insert_student(id_var, name_var, grade_var, gpa_var, dorm_var, classification_var, adviser_var):
-    id = id_var.get()
-    name = name_var.get()
-    grade = grade_var.get()
-    gpa = gpa_var.get()
-    dorm = dorm_var.get()
-    classification = classification_var.get()
-    adviser = adviser_var.get()
-
-    if(id == "" or name == "" or grade == "" or gpa == "" or dorm == "" or classification == "" or adviser == ""):
-        #TODO print message about valid args
+def delete_student(id_var):
+    if(len(id_var.get()) == 0):
+        # TODO print message about valid args
         change_page("back")
+        return
 
+    id = id_var.get()
 
     cnx = connect()
     cursor = cnx.cursor()
-    student_data = (id, name, grade, gpa, dorm, classification, adviser)
-    insertion = ("INSERT INTO Student "
-                 "(student_id, stu_name, grade_level, gpa, dormitory_name, classification, advisor) "
-                 "VALUES (%s, %s, %s, %s, %s, %s, %s)")
-    cursor.execute(insertion, student_data)
+    student_data = (id)
+    deletion = ("delete "
+                 "from Student "
+                 "where student_id = %s")
+    cursor.execute(deletion, student_data)
     cnx.commit()
     cursor.close()
     cnx.close()
+    # TODO print success message
+    change_page("main")
 
-    id_var.set("")
-    name_var.set("")
-    grade_var.set("")
-    gpa_var.set("")
-    dorm_var.set("")
-    classification_var.set("")
-    adviser_var.set("")
-
+#----- v Faculty page and deletion v --------
 def faculty_page(root):
     id_var = tk.StringVar()
-    name_var = tk.StringVar()
-    salary_var = tk.StringVar()
-    phone_var = tk.StringVar()
 
-    id_label = tk.Label(root, text='Student ID', font=('calibre', 10, 'bold')).grid(row=0, column=0)
+    id_label = tk.Label(root, text='Faculty ID', font=('calibre', 10, 'bold')).grid(row=0, column=0)
     id_entry = tk.Entry(root, textvariable=id_var, font=('calibre', 10, 'normal')).grid(row=0, column=1)
 
-    name_label = tk.Label(root, text='Name', font=('calibre', 10, 'bold')).grid(row=1, column=0)
-    name_entry = tk.Entry(root, textvariable=name_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
-
-    salary_label = tk.Label(root, text='Salary', font=('calibre', 10, 'bold')).grid(row=2, column=0)
-    salary_entry = tk.Entry(root, textvariable=salary_var, font=('calibre', 10, 'normal')).grid(row=2, column=1)
-
-    phone_label = tk.Label(root, text='phone', font=('calibre', 10, 'bold')).grid(row=3, column=0)
-    phone_entry = tk.Entry(root, textvariable=phone_var, font=('calibre', 10, 'normal')).grid(row=3, column=1)
-
-    sub_btn = tk.Button(root, text='ADD',
-                        command=lambda: insert_faculty(id_var, name_var, salary_var, phone_var).grid(row=7, column=1))
+    sub_btn2 = tk.Button(root, text='DELETE', command=lambda: delete_faculty(id_var).grid(row=7, column=1))
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
 
 
-def insert_faculty(id_var, name_var, salary_var, phone_var):
-    id = id_var.get()
-    name = name_var.get()
-    salary = salary_var.get()
-    phone = phone_var.get()
-    if(id == "" or name == "" or salary == "" or phone == ""):
-        #TODO print message about valid args
+def delete_faculty(id_var):
+    if (len(id_var.get()) == 0):
+        # TODO print message about valid args
         change_page("back")
+        return
 
+    id = id_var.get()
 
     cnx = connect()
     cursor = cnx.cursor()
-    faculty_data = (id, name, salary, phone)
-    insertion = ("INSERT INTO Facultly "
-                 "(student_id, stu_name, grade_level, gpa, dormitory_name, classification, advisor) "
-                 "VALUES (%s, %s, %s, %s, %s, %s, %s)")
-    cursor.execute(insertion, faculty_data)
+    faculty_data = (id)
+    deletion = ("delete "
+                "from Faculty "
+                "where fac_id = %s) ")
+
+    cursor.execute(deletion, faculty_data)
     cnx.commit()
     cursor.close()
     cnx.close()
+    #TODO print success message
+    change_page("main")
 
-    id_var.set("")
-    name_var.set("")
-    salary_var.set("")
-    phone_var.set("")
+#----- v Dormitory page and deletion v --------
+def dormitory_page(root):
+    name_var = tk.StringVar()
+
+    name_label = tk.Label(root, text='Dormitory Name', font=('calibre', 10, 'bold')).grid(row=0, column=0)
+    name_entry = tk.Entry(root, textvariable=name_var, font=('calibre', 10, 'normal')).grid(row=0, column=1)
+
+    sub_btn = tk.Button(root, text='DELETE',
+                        command=lambda: delete_dormitory(name_var).grid(row=7, column=1))
+    back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
+
+
+def delete_dormitory(name_var):
+    if (len(name_var.get()) == 0):
+        # TODO print message about valid args
+        change_page("back")
+        return
+
+    name = name_var.get()
+
+    cnx = connect()
+    cursor = cnx.cursor()
+    dormitory_data = (name)
+    deletion = ("delete "
+                "from Dormitory "
+                "where name = %s) ")
+
+    cursor.execute(deletion, dormitory_data)
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+    # TODO print success message
+    change_page("main")
+
+#----- v Course page and deletion v --------
+def course_page(root):
+    id_var = tk.StringVar()
+
+    id_label = tk.Label(root, text='Course ID', font=('calibre', 10, 'bold')).grid(row=0, column=0)
+    id_entry = tk.Entry(root, textvariable=id_var, font=('calibre', 10, 'normal')).grid(row=0, column=1)
+
+    sub_btn = tk.Button(root, text='DELETE',
+                        command=lambda: delete_course(id_var).grid(row=7, column=1))
+    back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
+
+
+def delete_course(id_var):
+    if (len(id_var.get()) == 0):
+        # TODO print message about valid args
+        change_page("back")
+        return
+
+    id = id_var.get()
+
+    cnx = connect()
+    cursor = cnx.cursor()
+    course_data = (id)
+    deletion = ("delete "
+                "from Course "
+                "where id = %s) ")
+
+    cursor.execute(deletion, course_data)
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+    # TODO print success message
+    change_page("main")
+
+#----- v CourseSection page and deletion v --------
+
+def course_section_page(root):
+    sec_id_var = tk.StringVar()
+    course_id_var = tk.StringVar()
+
+    sec_id_label = tk.Label(root, text='Section ID', font=('calibre', 10, 'bold')).grid(row=0, column=0)
+    sec_id_entry = tk.Entry(root, textvariable=sec_id_var, font=('calibre', 10, 'normal')).grid(row=0, column=1)
+
+    course_id_label = tk.Label(root, text='Course ID', font=('calibre', 10, 'bold')).grid(row=1, column=0)
+    course_id_entry = tk.Entry(root, textvariable=course_id_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
+
+    sub_btn = tk.Button(root, text='DELETE',
+                        command=lambda: delete_course_section(sec_id_var, course_id_var).grid(row=7, column=1))
+    back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
+
+
+def delete_course_section(sec_id_var, course_id_var, instr_id_var, building_var):
+    if (len(sec_id_var.get()) == 0 or len(course_id_var.get()) == 0):
+        # TODO print message about valid args
+        change_page("back")
+        return
+
+    sec_id = sec_id_var.get()
+    course_id = course_id_var.get()
+
+    cnx = connect()
+    cursor = cnx.cursor()
+    course_section_data = (sec_id, course_id)
+    deletion = ("delete "
+                "from Student "
+                "where section_id = %s AND course_id = %s) ")
+
+    cursor.execute(deletion, course_section_data)
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+    # TODO print success message
+    change_page("main")
+
+
+#----- v Department page and deletion v --------
+def department_page(root):
+    name_var = tk.StringVar()
+
+    name_label = tk.Label(root, text='Department Name', font=('calibre', 10, 'bold')).grid(row=0, column=0)
+    name_entry = tk.Entry(root, textvariable=name_var, font=('calibre', 10, 'normal')).grid(row=0, column=1)
+
+    sub_btn = tk.Button(root, text='DELETE',
+                        command=lambda: delete_department(name_var).grid(row=7, column=1))
+    back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
+
+
+def delete_department(name_var):
+    if (len(name_var.get()) == 0):
+        # TODO print message about valid args
+        change_page("back")
+        return
+
+    name = name_var.get()
+
+    cnx = connect()
+    cursor = cnx.cursor()
+    department_data = (name)
+    deletion = ("delete "
+                "from Department "
+                "where id = %s) ")
+
+    cursor.execute(deletion, department_data)
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+    # TODO print success message
+    change_page("main")
+
+
+#----- v Classroom page and deletion v --------
+def classroom_page(root):
+    room_var = tk.StringVar()
+    building_var = tk.StringVar()
+    cap_var = tk.StringVar()
+
+    name_label = tk.Label(root, text='Room Number', font=('calibre', 10, 'bold')).grid(row=0, column=0)
+    name_entry = tk.Entry(root, textvariable=room_var, font=('calibre', 10, 'normal')).grid(row=0, column=1)
+
+    building_label = tk.Label(root, text='Building', font=('calibre', 10, 'bold')).grid(row=2, column=0)
+    building_entry = tk.Entry(root, textvariable=building_var, font=('calibre', 10, 'normal')).grid(row=2, column=1)
+
+    sub_btn = tk.Button(root, text='DELETE',
+                        command=lambda: delete_classroom(room_var, building_var).grid(row=7, column=1))
+    back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
+
+
+def delete_classroom(room_var, building_var):
+    if (len(room_var.get()) == 0 or len(building_var.get()) == 0):
+        # TODO print message about valid args
+        change_page("back")
+        return
+
+    room = room_var.get()
+    building = building_var.get()
+
+    cnx = connect()
+    cursor = cnx.cursor()
+    classrooom_data = (room, building)
+    deletion = ("delete "
+                "from Classroom "
+                "where room_number = %s AND building_name = %s) ")
+    cursor.execute(deletion, classrooom_data)
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+    # TODO print success message
+    change_page("main")
+
+
+#----- v Club page and deletion v --------
+def club_page(root):
+    name_var = tk.StringVar()
+
+    name_label = tk.Label(root, text='Club Name', font=('calibre', 10, 'bold')).grid(row=0, column=0)
+    name_entry = tk.Entry(root, textvariable=name_var, font=('calibre', 10, 'normal')).grid(row=0, column=1)
+
+    sub_btn = tk.Button(root, text='DELETE',
+                        command=lambda: delete_club(name_var).grid(row=7, column=1))
+    back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
+
+
+def delete_club(name_var):
+    if (len(name_var.get()) == 0):
+        # TODO print message about valid args
+        change_page("back")
+        return
+
+    name = name_var.get()
+
+    cnx = connect()
+    cursor = cnx.cursor()
+    club_data = (name)
+    deletion = ("delete "
+                "from Club "
+                "where club_name = %s) ")
+
+    cursor.execute(deletion, club_data)
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+    # TODO print success message
+    change_page("main")
+
+#----- v Building page and deletion v --------
+def building_page(root):
+    name_var = tk.StringVar()
+
+    name_label = tk.Label(root, text='Building Name', font=('calibre', 10, 'bold')).grid(row=0, column=0)
+    name_entry = tk.Entry(root, textvariable=name_var, font=('calibre', 10, 'normal')).grid(row=0, column=1)
+
+    sub_btn = tk.Button(root, text='DELETE',
+                        command=lambda: delete_building(name_var).grid(row=7, column=1))
+    back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
+
+
+def delete_building(name_var):
+    if (len(name_var.get()) == 0):
+        # TODO print message about valid args
+        change_page("back")
+        return
+
+    name = name_var.get()
+
+    cnx = connect()
+    cursor = cnx.cursor()
+    building_data = (name)
+    deletion = ("delete "
+                "from Building "
+                "where building_name = %s) ")
+
+    cursor.execute(deletion, building_data)
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+    # TODO print success message
+    change_page("main")
+
 
 
 def change_page(table):
     for widget in temp_root.winfo_children():
         widget.destroy()
     if table == "back":
-            delete_home(temp_root)
+        delete_home(temp_root)
+    elif table == "main":
+        main.home(temp_root)
     elif table == "Student":
         student_page(temp_root)
     elif table == "Faculty":
         faculty_page(temp_root)
-    #elif table == "Course":
-    #    course_page(temp_root)
+    elif table == "Dormitory":
+        dormitory_page(temp_root)
+    elif table == "Course":
+        course_page(temp_root)
+    elif table == "CourseSection":
+        course_section_page(temp_root)
+    elif table == "Department":
+        department_page(temp_root)
+    elif table == "Classroom":
+       classroom_page(temp_root)
+    elif table == "Club":
+        club_page(temp_root)
+    elif table == "Building":
+        building_page(temp_root)
