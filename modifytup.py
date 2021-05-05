@@ -2,9 +2,10 @@ import tkinter as tk
 import mysql.connector
 from tkinter import *
 
-# Finished: Update functions for Student, Faculty, Course, Building
-# TODO: CourseSection, Building, Classroom, Club, Department, Dormitory
+# Finished: Update functions for Student, Faculty, Course, Building, Dormitory, Department, Club, Classroom
+# TODO: CourseSection
 # What if a ID doesn't exist in table? -> need to error-check
+
 
 def connect():
     cnx = mysql.connector.connect(user='root', password='rohanjerrytroy',
@@ -52,7 +53,7 @@ def update_student(id_var):
     for widget in temp_root.winfo_children():
         widget.destroy()
     id = id_var.get()
-    if (id == ""):
+    if (len(id) == 0):
         # TODO print message about valid args
         change_page("back")
     new_name_var = tk.StringVar()
@@ -100,7 +101,7 @@ def commit_student_update(id, new_name_var, new_grade_var, new_gpa_var, new_dorm
         change_page("back")
     else:
         cnx = connect()
-        cursor = cnx.cursor()
+        cursor = cnx.cursor(prepared=True)
         data = (new_name, new_grade, new_gpa, new_dorm, new_class, new_advisor, id)
         update = ("UPDATE Student "
                   "SET stu_name = %s, grade_level = %s, gpa = %s, dormitory_name = %s, classification = %s, advisor = %s "
@@ -178,7 +179,7 @@ def commit_faculty_update(id, new_name_var, new_dept_var, new_salary_var, new_ph
         # TODO print message about valid args
         change_page("back")
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     data = (new_name, new_dept, new_salary, new_phone, new_office, new_building, id)
     update = ("UPDATE Faculty "
               "SET faculty_name = %s, department = %s, salary = %s, phone_number = %s, office = %s, building = %s "
@@ -235,7 +236,7 @@ def commit_course_update(id, new_name_var, new_dept_var):
         change_page("back")
     else:
         cnx = connect()
-        cursor = cnx.cursor()
+        cursor = cnx.cursor(prepared=True)
         if (new_name == ""):
             data = (new_dept, id)
             update = ("UPDATE Course "
@@ -300,7 +301,7 @@ def commit_building_update(id, new_name_var, new_add_var):
         change_page("back")
     else:
         cnx = connect()
-        cursor = cnx.cursor()
+        cursor = cnx.cursor(prepared=True)
         if (new_name == ""):
             data = (new_add, id)
             update = ("UPDATE Building "
@@ -326,12 +327,307 @@ def commit_building_update(id, new_name_var, new_add_var):
 
 
 def dorm_page(root):
+    name_var = tk.StringVar()
+
+    name_label = tk.Label(root, text='Please enter the current name of the dormitory to be updated:',
+                        font=('calibre', 10, 'bold')).grid(row=1, column=0)
+    name_entry = tk.Entry(root, textvariable=name_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
+
+    sub_btn = tk.Button(root, text='Submit', command=lambda: update_dorm(name_var)).grid(row=2, column=1)
+    back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=1, column=6)
+
+def update_dorm(name_var):
+    for widget in temp_root.winfo_children():
+        widget.destroy()
+    name = name_var.get()
+    if (name == ""):
+        # TODO print message about valid args
+        change_page("back")
+    new_name_var = tk.StringVar()
+    new_dine_var = tk.StringVar()
+    new_add_var = tk.StringVar()
+
+    new_name_label = tk.Label(temp_root, text='New Dormitory Name', font=('calibre', 10, 'bold')).grid(row=0, column=0)
+    new_name_entry = tk.Entry(temp_root, textvariable=new_name_var, font=('calibre', 10, 'normal')).grid(row=0,
+                                                                                                         column=1)
+    new_add_label = tk.Label(temp_root, text='New Address', font=('calibre', 10, 'bold')).grid(row=1, column=0)
+    new_add_entry = tk.Entry(temp_root, textvariable=new_add_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
+
+    new_dine_label = tk.Label(temp_root, text='New Dining Hall', font=('calibre', 10, 'bold')).grid(row=2, column=0)
+    new_dine_entry = tk.Entry(temp_root, textvariable=new_dine_var, font=('calibre', 10, 'normal')).grid(row=2, column=1)
+    desc_label = tk.Label(temp_root, text='(Need to include input for all attributes, even if they remain the same)',
+                          font=('calibre', 10, 'normal')).grid(row=3, column=0)
+    sub_btn = tk.Button(temp_root, text='Submit',
+                        command=lambda: commit_dorm_update(id, new_name_var, new_add_var, new_dine_var)).grid(row=3, column=1)
+    back_btn = tk.Button(temp_root, text="Back", command=lambda: change_page("back")).grid(row=1, column=6)
 
 
-def update_dorm():
+def commit_dorm_update(id, new_name_var, new_add_var, new_dine_var):
+    new_name = new_name_var.get()
+    new_add = new_add_var.get()
+    new_dine = new_dine_var.get()
+
+    if (new_name == "" or new_add == "" or new_dine == ""):
+        # TODO print message about valid args
+        change_page("back")
+    cnx = connect()
+    cursor = cnx.cursor(prepared=True)
+    data = (new_name, new_add, new_dine, id)
+    update = ("UPDATE Dormitory "
+              "SET dorm_name = %s, address = %s, dining_hall = %s "
+              "WHERE dorm_name = %s")
+    cursor.execute(update, data)
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+
+    new_name_var.set("")
+    new_add_var.set("")
+    new_dine_var.set("")
 
 
-def commit_dorm_update():
+def dept_page(root):
+    name_var = tk.StringVar()
+
+    namelabel = tk.Label(root, text='Please enter the current name of the department to be updated:',
+                        font=('calibre', 10, 'bold')).grid(row=1, column=0)
+    name_entry = tk.Entry(root, textvariable=name_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
+
+    sub_btn = tk.Button(root, text='Submit', command=lambda: update_dept(name_var)).grid(row=2, column=1)
+    back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=1, column=6)
+
+
+def update_dept(name_var):
+    for widget in temp_root.winfo_children():
+        widget.destroy()
+    name = name_var.get()
+    if (len(name) == 0):
+        # TODO print message about valid args
+        change_page("back")
+    new_name_var = tk.StringVar()
+    new_chair_var = tk.StringVar()
+    new_b_var = tk.StringVar()
+
+    new_name_label = tk.Label(temp_root, text='New Department Name', font=('calibre', 10, 'bold')).grid(row=0, column=0)
+    new_name_entry = tk.Entry(temp_root, textvariable=new_name_var, font=('calibre', 10, 'normal')).grid(row=0,
+                                                                                                         column=1)
+    new_chair_label = tk.Label(temp_root, text='New Chair', font=('calibre', 10, 'bold')).grid(row=1, column=0)
+    new_chair_entry = tk.Entry(temp_root, textvariable=new_chair_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
+
+    new_b_label = tk.Label(temp_root, text='New Building', font=('calibre', 10, 'bold')).grid(row=2, column=0)
+    new_b_entry = tk.Entry(temp_root, textvariable=new_b_var, font=('calibre', 10, 'normal')).grid(row=2, column=1)
+    desc_label = tk.Label(temp_root, text='(Need to include input for all attributes, even if they remain the same)',
+                          font=('calibre', 10, 'normal')).grid(row=3, column=0)
+    sub_btn = tk.Button(temp_root, text='Submit',
+                        command=lambda: commit_dept_update(id, new_name_var, new_chair_var, new_b_var)).grid(row=3, column=1)
+    back_btn = tk.Button(temp_root, text="Back", command=lambda: change_page("back")).grid(row=1, column=6)
+
+
+def commit_dept_update(id, new_name_var, new_chair_var, new_b_var):
+    new_name = new_name_var.get()
+    new_chair = new_chair_var.get()
+    new_b = new_b_var.get()
+
+    if (len(new_name) == 0 or len(new_chair) == 0 or len(new_b) == 0):
+        # TODO print message about valid args
+        change_page("back")
+    cnx = connect()
+    cursor = cnx.cursor(prepared=True)
+    data = (new_name, new_chair, new_b, id)
+    update = ("UPDATE Department "
+              "SET dept_name = %s, chair = %s, building = %s "
+              "WHERE dept_name = %s")
+    cursor.execute(update, data)
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+
+    #new_name_var.set("")
+    #new_chair_var.set("")
+    #new_b_var.set("")
+
+
+def club_page(root):
+    name_var = tk.StringVar()
+
+    name_label = tk.Label(root, text='Please enter the current name of the department to be updated:',
+                         font=('calibre', 10, 'bold')).grid(row=1, column=0)
+    name_entry = tk.Entry(root, textvariable=name_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
+
+    sub_btn = tk.Button(root, text='Submit', command=lambda: update_dept(name_var)).grid(row=2, column=1)
+    back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=1, column=6)
+
+
+def update_club(name_):
+    for widget in temp_root.winfo_children():
+        widget.destroy()
+    name = name_var.get()
+    if (len(name) == 0):
+        # TODO print message about valid args
+        change_page("back")
+    new_name_var = tk.StringVar()
+    new_super_var = tk.StringVar()
+    new_fund_var = tk.StringVar()
+    new_b_var = tk.StringVar()
+
+    new_name_label = tk.Label(temp_root, text='New Department Name', font=('calibre', 10, 'bold')).grid(row=0, column=0)
+    new_name_entry = tk.Entry(temp_root, textvariable=new_name_var, font=('calibre', 10, 'normal')).grid(row=0,
+                                                                                                         column=1)
+    new_super_label = tk.Label(temp_root, text='New Supervisor', font=('calibre', 10, 'bold')).grid(row=1, column=0)
+    new_super_entry = tk.Entry(temp_root, textvariable=new_super_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
+
+    new_fund_label = tk.Label(temp_root, text='New Building', font=('calibre', 10, 'bold')).grid(row=2, column=0)
+    new_fund_entry = tk.Entry(temp_root, textvariable=new_fund_var, font=('calibre', 10, 'normal')).grid(row=2, column=1)
+
+    new_b_label = tk.Label(temp_root, text='New Building', font=('calibre', 10, 'bold')).grid(row=3, column=0)
+    new_b_entry = tk.Entry(temp_root, textvariable=new_b_var, font=('calibre', 10, 'normal')).grid(row=3,
+                                                                                                         column=1)
+    desc_label = tk.Label(temp_root, text='(Need to include input for all attributes, even if they remain the same)',
+                          font=('calibre', 10, 'normal')).grid(row=4, column=0)
+    sub_btn = tk.Button(temp_root, text='Submit',
+                        command=lambda: commit_club_update(id, new_name_var, new_super_var, new_fund_var, new_b_var)).grid(row=4, column=1)
+    back_btn = tk.Button(temp_root, text="Back", command=lambda: change_page("back")).grid(row=1, column=6)
+
+def commit_club_update(id, new_name_var, new_super_var, new_fund_var, new_b_var):
+    new_name = new_name_var.get()
+    new_super = new_super_var.get()
+    new_fund = new_fund_var.get()
+    new_b = new_b_var.get()
+
+    if (new_name == "" or new_super == "" or new_fund == "" or new_b == ""):
+        # TODO print message about valid args
+        change_page("back")
+    cnx = connect()
+    cursor = cnx.cursor(prepared=True)
+    data = (new_name, new_super, new_fund, new_b, id)
+    update = ("UPDATE Club "
+              "SET club_name = %s, supervisor_id = %s, funding = %s, building_name = %s "
+              "WHERE club_name = %s")
+    cursor.execute(update, data)
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+
+
+def cr_page(root):
+    room_var = tk.StringVar()
+    b_var = tk.StringVar()
+
+    room_label = tk.Label(root, text='Please enter the current classroom number to be updated:',
+                         font=('calibre', 10, 'bold')).grid(row=1, column=0)
+    room_entry = tk.Entry(root, textvariable=room_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
+    b_label = tk.Label(root, text='Please enter the building of the classroom:',
+                         font=('calibre', 10, 'bold')).grid(row=2, column=0)
+    b_entry = tk.Entry(root, textvariable=b_var, font=('calibre', 10, 'normal')).grid(row=2, column=1)
+
+    sub_btn = tk.Button(root, text='Submit', command=lambda: update_cr(room_var, b_var)).grid(row=3, column=1)
+    back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=1, column=6)
+
+def update_cr(room_var, b_var):
+    for widget in temp_root.winfo_children():
+        widget.destroy()
+    room = room_var.get()
+    b = b_var.get()
+    if (room == "" or b == ""):
+        # TODO print message about valid args
+        change_page("back")
+    new_room_var = tk.StringVar()
+    new_b_var = tk.StringVar()
+    new_c_var = tk.StringVar()
+
+    new_room_label = tk.Label(temp_root, text='New Room Number', font=('calibre', 10, 'bold')).grid(row=0, column=0)
+    new_room_entry = tk.Entry(temp_root, textvariable=new_room_var, font=('calibre', 10, 'normal')).grid(row=0,
+                                                                                                         column=1)
+    new_b_label = tk.Label(temp_root, text='New Building', font=('calibre', 10, 'bold')).grid(row=1, column=0)
+    new_b_entry = tk.Entry(temp_root, textvariable=new_b_var, font=('calibre', 10, 'normal')).grid(row=1,
+                                                                                                           column=1)
+
+    new_c_label = tk.Label(temp_root, text='New Capacity', font=('calibre', 10, 'bold')).grid(row=2, column=0)
+    new_c_entry = tk.Entry(temp_root, textvariable=new_c_var, font=('calibre', 10, 'normal')).grid(row=2,
+                                                                                                         column=1)
+    desc_label = tk.Label(temp_root, text='(Need to include input for all attributes, even if they remain the same)',
+                          font=('calibre', 10, 'normal')).grid(row=3, column=0)
+    sub_btn = tk.Button(temp_root, text='Submit',
+                        command=lambda: commit_cr_update(room, b, new_room_var, new_b_var, new_c_var)).grid(row=3, column=1)
+    back_btn = tk.Button(temp_root, text="Back", command=lambda: change_page("back")).grid(row=1, column=6)
+
+
+def commit_cr_update(room, b, new_room_var, new_b_var, new_c_var):
+    new_room = new_room_var.get()
+    new_c = new_c_var.get()
+    new_b = new_b_var.get()
+
+    if (new_room == "" or new_c == "" or new_b == ""):
+        # TODO print message about valid args
+        change_page("back")
+    cnx = connect()
+    cursor = cnx.cursor(prepared=True)
+    data = (new_room, new_b, new_c, room, b)
+    update = ("UPDATE Classroom "
+              "SET room_number = %s, building_name = %s, capacity = %s "
+              "WHERE room_number = %s AND building_name = %s")
+    cursor.execute(update, data)
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+
+
+def cs_page(root):
+    secid_var = tk.StringVar()
+    cid_var = tk.StringVar()
+
+    secid_label = tk.Label(root, text='Please enter the course ID of the course to be updated:',
+                        font=('calibre', 10, 'bold')).grid(row=1, column=0)
+    secid_entry = tk.Entry(root, textvariable=secid_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
+
+    cid_label = tk.Label(root, text='Please enter the section ID of the course to be updated:',
+                           font=('calibre', 10, 'bold')).grid(row=2, column=0)
+    cid_entry = tk.Entry(root, textvariable=cid_var, font=('calibre', 10, 'normal')).grid(row=2, column=1)
+
+    sub_btn = tk.Button(root, text='Submit', command=lambda: update_cs(secid_var, cid_var)).grid(row=3, column=1)
+    back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=1, column=6)
+
+
+def update_cs(secid_var, cid_var):
+    for widget in temp_root.winfo_children():
+        widget.destroy()
+    secid = secid_var.get()
+    cid = cid_var.get()
+    if (len(secid) == 0 or len(cid) == 0):
+        # TODO print message about valid args
+        change_page("back")
+    new_i_var = tk.StringVar()
+    new_b_var = tk.StringVar()
+
+    new_i_label = tk.Label(temp_root, text='New Instructor ID', font=('calibre', 10, 'bold')).grid(row=0, column=0)
+    new_i_entry = tk.Entry(temp_root, textvariable=new_i_var, font=('calibre', 10, 'normal')).grid(row=0, column=1)
+    new_b_label = tk.Label(temp_root, text='New Building', font=('calibre', 10, 'bold')).grid(row=1, column=0)
+    new_b_entry = tk.Entry(temp_root, textvariable=new_b_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
+    desc_label = tk.Label(temp_root, text='(Need to include input for all attributes, even if they remain the same)',
+                          font=('calibre', 10, 'normal')).grid(row=2, column=0)
+    sub_btn = tk.Button(temp_root, text='Submit',
+                        command=lambda: commit_cs_update(secid, cid, new_i_var, new_b_var)).grid(row=2, column=1)
+    back_btn = tk.Button(temp_root, text="Back", command=lambda: change_page("back")).grid(row=1, column=6)
+
+
+def commit_cs_update(secid, cid, new_i_var, new_b_var):
+    new_i = new_i_var.get()
+    new_b = new_b_var.get()
+
+    if (new_i == "" or new_b == ""):
+        # TODO print message about valid args
+        change_page("back")
+    cnx = connect()
+    cursor = cnx.cursor(prepared=True)
+    data = (new_i, new_b, secid, cid)
+    update = ("UPDATE CourseSection "
+              "SET instructor_id = %s, building_name = %s "
+              "WHERE section_id = %s AND course_id = %s")
+    cursor.execute(update, data)
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+
 
 def change_page(table):
     for widget in temp_root.winfo_children():
