@@ -2,7 +2,6 @@ import inserttup as insert
 import modifytup as modify
 import deletetup as delete
 import querytup as query
-
 import viewtup as view
 import tkinter as tk
 
