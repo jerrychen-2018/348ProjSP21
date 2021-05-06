@@ -1,10 +1,7 @@
 import tkinter as tk
 import mysql.connector
 from tkinter import *
-
-# Finished: Update functions for Student, Faculty, Course, Building, Dormitory, Department, Club, Classroom
-# TODO: CourseSection
-# What if a ID doesn't exist in table? -> need to error-check
+import main
 
 
 def connect():
@@ -36,26 +33,49 @@ def modify_home(root):
     clicked.set("Select Table")
     drop = OptionMenu(root, clicked, *table_options).grid(row=2, column=5)
     myButton = tk.Button(root, text="Confirm Selection", command=lambda: change_page(clicked.get())).grid(row=2, column=6)
+    back_btn = tk.Button(root, text="Back", command=lambda: change_page("main")).grid(row=2, column=7)
 
 
 def student_page(root):
+    for widget in temp_root.winfo_children():
+        widget.destroy()
     id_var = tk.StringVar()
 
     id_label = tk.Label(root, text='Please enter the current ID of the student to be updated:',
                         font=('calibre', 10, 'bold')).grid(row=1, column=0)
     id_entry = tk.Entry(root, textvariable=id_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
 
-    sub_btn = tk.Button(root, text='Submit', command=lambda: update_student(id_var)).grid(row=2, column=1)
+    sub_btn = tk.Button(root, text='Submit', command=lambda: validate_stud(id_var)).grid(row=2, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=1, column=6)
 
+
+def validate_stud(id_var):
+    if (len(id_var.get()) == 0):
+        tk.Label(temp_root, text='ERROR: try again', fg="red", font=('calibre', 10, 'bold')).grid(row=3, column=0)
+        id_var.set("")
+    else:
+        cnx = connect()
+        cursor = cnx.cursor(prepared=True)
+        data = (id_var.get().split())
+        verify = ("SELECT COUNT(*) "
+                  "FROM Student "
+                  "WHERE student_id = %s")
+        cursor.execute(verify, data)
+        res = cursor.fetchall()
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+        if (res[0][0] != 1):
+            tk.Label(temp_root, text='ERROR: try again', fg="red", font=('calibre', 10, 'bold')).grid(row=3, column=0)
+            id_var.set("")
+        else:
+            update_student(id_var)
 
 def update_student(id_var):
     for widget in temp_root.winfo_children():
         widget.destroy()
     id = id_var.get()
-    if (len(id) == 0):
-        # TODO print message about valid args
-        change_page("back")
+
     new_name_var = tk.StringVar()
     new_grade_var = tk.StringVar()
     new_gpa_var = tk.StringVar()
@@ -126,17 +146,36 @@ def faculty_page(root):
                         font=('calibre', 10, 'bold')).grid(row=1, column=0)
     id_entry = tk.Entry(root, textvariable=id_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
 
-    sub_btn = tk.Button(root, text='Submit', command=lambda: update_faculty(id_var)).grid(row=2, column=1)
+    sub_btn = tk.Button(root, text='Submit', command=lambda: validate_fac(id_var)).grid(row=2, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=1, column=6)
 
+
+def validate_fac(id_var):
+    if (len(id_var.get()) == 0):
+        tk.Label(temp_root, text='ERROR: try again', fg="red", font=('calibre', 10, 'bold')).grid(row=3, column=0)
+        id_var.set("")
+    else:
+        cnx = connect()
+        cursor = cnx.cursor(prepared=True)
+        data = (id_var.get().split())
+        verify = ("SELECT COUNT(*) "
+                  "FROM Faculty "
+                  "WHERE fac_id = %s")
+        cursor.execute(verify, data)
+        res = cursor.fetchall()
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+        if (res[0][0] != 1):
+            tk.Label(temp_root, text='ERROR: try again', fg="red", font=('calibre', 10, 'bold')).grid(row=3, column=0)
+            id_var.set("")
+        else:
+            update_faculty(id_var)
 
 def update_faculty(id_var):
     for widget in temp_root.winfo_children():
         widget.destroy()
     id = id_var.get()
-    if (id == ""):
-        # TODO print message about valid args
-        change_page("back")
     new_name_var = tk.StringVar()
     new_dept_var = tk.StringVar()
     new_salary_var = tk.StringVar()
@@ -203,9 +242,31 @@ def course_page(root):
     id_label = tk.Label(root, text='Please enter the current ID of the course to be updated:', font=('calibre', 10, 'bold')).grid(row=1, column=0)
     id_entry = tk.Entry(root, textvariable=id_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
 
-    sub_btn = tk.Button(root, text='Submit', command=lambda: update_course(id_var)).grid(row=2, column=1)
+    sub_btn = tk.Button(root, text='Submit', command=lambda: validate_course(id_var)).grid(row=2, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=1, column=6)
 
+
+def validate_course(id_var):
+    if (len(id_var.get()) == 0):
+        tk.Label(temp_root, text='ERROR: try again', fg="red", font=('calibre', 10, 'bold')).grid(row=3, column=0)
+        id_var.set("")
+    else:
+        cnx = connect()
+        cursor = cnx.cursor(prepared=True)
+        data = (id_var.get().split())
+        verify = ("SELECT COUNT(*) "
+                  "FROM Course "
+                  "WHERE course_id = %s")
+        cursor.execute(verify, data)
+        res = cursor.fetchall()
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+        if (res[0][0] != 1):
+            tk.Label(temp_root, text='ERROR: try again', fg="red", font=('calibre', 10, 'bold')).grid(row=3, column=0)
+            id_var.set("")
+        else:
+            update_course(id_var)
 
 def update_course(id_var):
     for widget in temp_root.winfo_children():
@@ -268,8 +329,33 @@ def b_page(root):
                         font=('calibre', 10, 'bold')).grid(row=1, column=0)
     id_entry = tk.Entry(root, textvariable=id_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
 
-    sub_btn = tk.Button(root, text='Submit', command=lambda: update_building(id_var)).grid(row=2, column=1)
+    sub_btn = tk.Button(root, text='Submit', command=lambda: validate_b(id_var)).grid(row=2, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=1, column=6)
+
+
+def validate_b(id_var):
+    if (len(id_var.get()) == 0):
+        tk.Label(temp_root, text='ERROR: try again', fg="red", font=('calibre', 10, 'bold')).grid(row=3, column=0)
+        id_var.set("")
+    else:
+        cnx = connect()
+        cursor = cnx.cursor(prepared=True)
+        data = (id_var.get().split())
+        print(data)
+        verify = ("SELECT COUNT(*) "
+                  "FROM Building "
+                  "WHERE building_name = %s")
+        cursor.execute(verify, data)
+        res = cursor.fetchall()
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+        if (res[0][0] != 1):
+            print(res)
+            tk.Label(temp_root, text='ERROR: try again', fg="red", font=('calibre', 10, 'bold')).grid(row=3, column=0)
+            id_var.set("")
+        else:
+            update_building(id_var)
 
 
 def update_building(id_var):
@@ -333,16 +419,36 @@ def dorm_page(root):
                         font=('calibre', 10, 'bold')).grid(row=1, column=0)
     name_entry = tk.Entry(root, textvariable=name_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
 
-    sub_btn = tk.Button(root, text='Submit', command=lambda: update_dorm(name_var)).grid(row=2, column=1)
+    sub_btn = tk.Button(root, text='Submit', command=lambda: validate_dorm(name_var)).grid(row=2, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=1, column=6)
+
+
+def validate_dorm(name_var):
+    if (len(name_var.get()) == 0):
+        tk.Label(temp_root, text='ERROR: try again', fg="red", font=('calibre', 10, 'bold')).grid(row=3, column=0)
+        name_var.set("")
+    else:
+        cnx = connect()
+        cursor = cnx.cursor(prepared=True)
+        data = (name_var.get().split())
+        verify = ("SELECT COUNT(*) "
+                  "FROM Dormitory "
+                  "WHERE dorm_name = %s")
+        cursor.execute(verify, data)
+        res = cursor.fetchall()
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+        if (res[0][0] != 1):
+            tk.Label(temp_root, text='ERROR: try again', fg="red", font=('calibre', 10, 'bold')).grid(row=3, column=0)
+            name_var.set("")
+        else:
+            update_dorm(name_var)
 
 def update_dorm(name_var):
     for widget in temp_root.winfo_children():
         widget.destroy()
     name = name_var.get()
-    if (name == ""):
-        # TODO print message about valid args
-        change_page("back")
     new_name_var = tk.StringVar()
     new_dine_var = tk.StringVar()
     new_add_var = tk.StringVar()
@@ -393,17 +499,36 @@ def dept_page(root):
                         font=('calibre', 10, 'bold')).grid(row=1, column=0)
     name_entry = tk.Entry(root, textvariable=name_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
 
-    sub_btn = tk.Button(root, text='Submit', command=lambda: update_dept(name_var)).grid(row=2, column=1)
+    sub_btn = tk.Button(root, text='Submit', command=lambda: validate_dept(name_var)).grid(row=2, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=1, column=6)
 
+
+def validate_dept(name_var):
+    if (len(name_var.get()) == 0):
+        tk.Label(temp_root, text='ERROR: try again', fg="red", font=('calibre', 10, 'bold')).grid(row=3, column=0)
+        name_var.set("")
+    else:
+        cnx = connect()
+        cursor = cnx.cursor(prepared=True)
+        data = (name_var.get().split())
+        verify = ("SELECT COUNT(*) "
+                  "FROM Department "
+                  "WHERE dept_name = %s")
+        cursor.execute(verify, data)
+        res = cursor.fetchall()
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+        if (res[0][0] != 1):
+            tk.Label(temp_root, text='ERROR: try again', fg="red", font=('calibre', 10, 'bold')).grid(row=3, column=0)
+            name_var.set("")
+        else:
+            update_dept(name_var)
 
 def update_dept(name_var):
     for widget in temp_root.winfo_children():
         widget.destroy()
     name = name_var.get()
-    if (len(name) == 0):
-        # TODO print message about valid args
-        change_page("back")
     new_name_var = tk.StringVar()
     new_chair_var = tk.StringVar()
     new_b_var = tk.StringVar()
@@ -454,17 +579,36 @@ def club_page(root):
                          font=('calibre', 10, 'bold')).grid(row=1, column=0)
     name_entry = tk.Entry(root, textvariable=name_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
 
-    sub_btn = tk.Button(root, text='Submit', command=lambda: update_dept(name_var)).grid(row=2, column=1)
+    sub_btn = tk.Button(root, text='Submit', command=lambda: validate_club(name_var)).grid(row=2, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=1, column=6)
 
 
-def update_club(name_):
+def validate_club(name_var):
+    if (len(name_var.get()) == 0):
+        tk.Label(temp_root, text='ERROR: try again', fg="red", font=('calibre', 10, 'bold')).grid(row=3, column=0)
+        name_var.set("")
+    else:
+        cnx = connect()
+        cursor = cnx.cursor(prepared=True)
+        data = (name_var.get().split())
+        verify = ("SELECT COUNT(*) "
+                  "FROM Club "
+                  "WHERE club_name = %s")
+        cursor.execute(verify, data)
+        res = cursor.fetchall()
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+        if (res[0][0] != 1):
+            tk.Label(temp_root, text='ERROR: try again', fg="red", font=('calibre', 10, 'bold')).grid(row=3, column=0)
+            name_var.set("")
+        else:
+            update_club(name_var)
+
+def update_club(name_var):
     for widget in temp_root.winfo_children():
         widget.destroy()
     name = name_var.get()
-    if (len(name) == 0):
-        # TODO print message about valid args
-        change_page("back")
     new_name_var = tk.StringVar()
     new_super_var = tk.StringVar()
     new_fund_var = tk.StringVar()
@@ -520,17 +664,39 @@ def cr_page(root):
                          font=('calibre', 10, 'bold')).grid(row=2, column=0)
     b_entry = tk.Entry(root, textvariable=b_var, font=('calibre', 10, 'normal')).grid(row=2, column=1)
 
-    sub_btn = tk.Button(root, text='Submit', command=lambda: update_cr(room_var, b_var)).grid(row=3, column=1)
+    sub_btn = tk.Button(root, text='Submit', command=lambda: validate_cr(room_var, b_var)).grid(row=3, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=1, column=6)
+
+
+def validate_cr(room_var, b_var):
+    if (len(room_var.get()) == 0 or len(b_var.get()) == 0):
+        tk.Label(temp_root, text='ERROR: try again', fg="red", font=('calibre', 10, 'bold')).grid(row=3, column=0)
+        room_var.set("")
+        b_var.set("")
+    else:
+        cnx = connect()
+        cursor = cnx.cursor(prepared=True)
+        data = (room_var.get(), b_var.get())
+        verify = ("SELECT COUNT(*) "
+                  "FROM Classroom "
+                  "WHERE room_number = %s AND building_name = %s")
+        cursor.execute(verify, data)
+        res = cursor.fetchall()
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+        if (res[0][0] != 1):
+            tk.Label(temp_root, text='ERROR: try again', fg="red", font=('calibre', 10, 'bold')).grid(row=3, column=0)
+            room_var.set("")
+            b_var.set("")
+        else:
+            update_cr(room_var, b_var)
 
 def update_cr(room_var, b_var):
     for widget in temp_root.winfo_children():
         widget.destroy()
     room = room_var.get()
     b = b_var.get()
-    if (room == "" or b == ""):
-        # TODO print message about valid args
-        change_page("back")
     new_room_var = tk.StringVar()
     new_b_var = tk.StringVar()
     new_c_var = tk.StringVar()
@@ -541,7 +707,6 @@ def update_cr(room_var, b_var):
     new_b_label = tk.Label(temp_root, text='New Building', font=('calibre', 10, 'bold')).grid(row=1, column=0)
     new_b_entry = tk.Entry(temp_root, textvariable=new_b_var, font=('calibre', 10, 'normal')).grid(row=1,
                                                                                                            column=1)
-
     new_c_label = tk.Label(temp_root, text='New Capacity', font=('calibre', 10, 'bold')).grid(row=2, column=0)
     new_c_entry = tk.Entry(temp_root, textvariable=new_c_var, font=('calibre', 10, 'normal')).grid(row=2,
                                                                                                          column=1)
@@ -584,8 +749,33 @@ def cs_page(root):
                            font=('calibre', 10, 'bold')).grid(row=2, column=0)
     cid_entry = tk.Entry(root, textvariable=cid_var, font=('calibre', 10, 'normal')).grid(row=2, column=1)
 
-    sub_btn = tk.Button(root, text='Submit', command=lambda: update_cs(secid_var, cid_var)).grid(row=3, column=1)
+    sub_btn = tk.Button(root, text='Submit', command=lambda: validate_cs(secid_var, cid_var)).grid(row=3, column=1)
     back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=1, column=6)
+
+
+def validate_cs(secid_var, cid_var):
+    if (len(secid_var.get()) == 0 or len(cid_var.get()) == 0):
+        tk.Label(temp_root, text='ERROR: try again', fg="red", font=('calibre', 10, 'bold')).grid(row=3, column=0)
+        secid_var.set("")
+        cid_var.set("")
+    else:
+        cnx = connect()
+        cursor = cnx.cursor(prepared=True)
+        data = (secid_var.get(), cid_var.get())
+        verify = ("SELECT COUNT(*) "
+                  "FROM CourseSection "
+                  "WHERE section_id = %s AND course_id = %s")
+        cursor.execute(verify, data)
+        res = cursor.fetchall()
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+        if (res[0][0] != 1):
+            tk.Label(temp_root, text='ERROR: try again', fg="red", font=('calibre', 10, 'bold')).grid(row=3, column=0)
+            secid_var.set("")
+            cid_var.set("")
+        else:
+            update_cs(secid_var, cid_var)
 
 
 def update_cs(secid_var, cid_var):
@@ -633,7 +823,9 @@ def change_page(table):
     for widget in temp_root.winfo_children():
         widget.destroy()
     if table == "back":
-            modify_home(temp_root)
+        modify_home(temp_root)
+    elif table == "main":
+        main.home(temp_root)
     elif table == "Student":
         student_page(temp_root)
     elif table == "Faculty":
