@@ -46,9 +46,6 @@ def student_page(root):
         classification_var = tk.StringVar()
         adviser_var = tk.StringVar()
 
-        id_label = tk.Label(root, text='Student ID', font=('calibre', 10, 'bold')).grid(row=0, column=0)
-        id_entry = tk.Entry(root, textvariable=id_var, font=('calibre', 10, 'normal')).grid(row=0, column=1)
-
         name_label = tk.Label(root, text='Name', font=('calibre', 10, 'bold')).grid(row=1, column=0)
         name_entry = tk.Entry(root, textvariable=name_var, font=('calibre', 10, 'normal')).grid(row=1, column=1)
 
@@ -68,16 +65,16 @@ def student_page(root):
         adviser_label = tk.Label(root, text='Advisor', font=('calibre', 10, 'bold')).grid(row=6, column=0)
         adviser_entry = tk.Entry(root, textvariable=adviser_var, font=('calibre', 10, 'normal')).grid(row=6, column=1)
 
-        sub_btn = tk.Button(root, text='ADD', command=lambda: insert_student(id_var, name_var, grade_var, gpa_var, dorm_var, classification_var, adviser_var)).grid(row=7, column=1)
+        sub_btn = tk.Button(root, text='ADD', command=lambda: insert_student(name_var, grade_var, gpa_var, dorm_var, classification_var, adviser_var)).grid(row=7, column=1)
         back_btn = tk.Button(root, text="Back", command=lambda: change_page("back")).grid(row=2, column=6)
 
-def insert_student(id_var, name_var, grade_var, gpa_var, dorm_var, classification_var, adviser_var):
-    if(len(id_var.get()) == 0 or len(name_var.get()) == 0 or len(grade_var.get()) == 0 or len(gpa_var.get()) == 0 or len(dorm_var.get()) == 0 or len(classification_var.get()) == 0 or len(adviser_var.get()) == 0):
+def insert_student(name_var, grade_var, gpa_var, dorm_var, classification_var, adviser_var):
+    if(len(name_var.get()) == 0 or len(grade_var.get()) == 0 or len(gpa_var.get()) == 0 or len(dorm_var.get()) == 0 or len(classification_var.get()) == 0 or len(adviser_var.get()) == 0):
         messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
-    id = id_var.get()
+
     name = name_var.get()
     grade = grade_var.get()
     gpa = gpa_var.get()
@@ -87,10 +84,10 @@ def insert_student(id_var, name_var, grade_var, gpa_var, dorm_var, classificatio
 
     cnx = connect()
     cursor = cnx.cursor(prepared=True)
-    student_data = (id, name, grade, gpa, dorm, classification, adviser)
+    student_data = (name, grade, gpa, dorm, classification, adviser)
     insertion = ("INSERT INTO Student "
-                 "(student_id, stu_name, grade_level, gpa, dormitory_name, classification, advisor) "
-                 "VALUES (%s, %s, %s, %s, %s, %s, %s)")
+                 "(stu_name, grade_level, gpa, dormitory_name, classification, advisor) "
+                 "VALUES (%s, %s, %s, %s, %s, %s)")
     cursor.execute(insertion, student_data)
     cnx.commit()
     cursor.close()

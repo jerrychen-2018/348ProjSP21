@@ -70,13 +70,6 @@ def select_student(root, id_var):
                   + "Advisor: " + str(advisor) + "\n"
 
     messagebox.showinfo("showinfo", message)
-
-    var = StringVar()
-    label = Message(root, textvariable = var, relief = RAISED)
-
-    var.set("Hey!? How are you doing?")
-    label.grid(row=0, column=0)
-
     cnx.commit()
     cursor.close()
     cnx.close()
@@ -417,7 +410,11 @@ def select_building(name_var):
     cursor.execute(selection, building_data)
 
     for (building_name, address, HasHandicapAccess) in cursor:
-        print(building_name, address, HasHandicapAccess)
+        message = "Club Name: " + str(building_name) + "\n" \
+                  + "Supervisor ID: " + str(address) + "\n" \
+                  + "Funding($): " + str(HasHandicapAccess) + "\n" \
+
+    messagebox.showinfo("showinfo", message)
 
     cnx.commit()
     cursor.close()
