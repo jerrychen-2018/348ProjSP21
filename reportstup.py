@@ -1,7 +1,10 @@
 # file created by Rohan Shankar
 import mysql.connector
 import tkinter as tk;
+import main as main
 
+
+'''
 window = tk.Tk()
 mystring = tk.StringVar(window)
 
@@ -12,6 +15,23 @@ window.title("School System Stored Procedures")
 
 frame = tk.LabelFrame(window)
 frame.grid(row=0, column=1)
+'''
+
+
+def reports_home(root):
+    for widget in root.winfo_children():
+        widget.destroy()
+    global mystring
+    mystring = tk.StringVar(root)
+
+    global temp_root
+    temp_root = root
+
+    global frame
+    frame = tk.LabelFrame(root)
+    frame.grid(row=0, column=1)
+    display()
+    back_btn = tk.Button(temp_root, text="Back", command=lambda: main.home(root)).grid(row=10, column=0)
 
 
 def disableAllButtons():
@@ -210,6 +230,7 @@ def getQuery3():
     cnx.commit()
     cursor.close()
     cnx.close()
+    '''
     print(query)
     cursor.execute(query)
     i = 0
@@ -228,6 +249,8 @@ def getQuery3():
     cnx.commit()
     cursor.close()
     cnx.close()
+    '''
+
 
 
 def getQuery4():
@@ -335,24 +358,34 @@ def getQuery7():
     cnx.close()
 
 
-button1 = tk.Button(window, text="1) Get all names of students in a specific class", command=clickButton)
-button2 = tk.Button(window, text="2) Get all professors teaching a specific course", command=clickButton2)
-button3 = tk.Button(window, text="3) Get names of all students that are club leaders", command=clickButton3)
-button4 = tk.Button(window, text="4) List which dorms have dining halls", command=clickButton4)
-button5 = tk.Button(window, text="5) See how many individual courses a professor is teaching", command=clickButton5)
-button6 = tk.Button(window, text="6) Rate a Professor's Difficulty", command=clickButton6)
-button7 = tk.Button(window, text="7) Rate my Courses", command=clickButton7)
-button8 = tk.Button(window, text="8) Create indexes", command=clickButton8)
-clearButton = tk.Button(window, text="Clear", command=clear)
+def display():
+    global button1
+    global button2
+    global button3
+    global button4
+    global button5
+    global button6
+    global button7
+    global button8
+    button1 = tk.Button(temp_root, text="1) Get all names of students in a specific class", command=clickButton)
+    button2 = tk.Button(temp_root, text="2) Get all professors teaching a specific course", command=clickButton2)
+    button3 = tk.Button(temp_root, text="3) Get names of all students that are club leaders", command=clickButton3)
+    button4 = tk.Button(temp_root, text="4) List which dorms have dining halls", command=clickButton4)
+    button5 = tk.Button(temp_root, text="5) See how many individual courses a professor is teaching",
+                        command=clickButton5)
+    button6 = tk.Button(temp_root, text="6) Rate a Professor's Difficulty", command=clickButton6)
+    button7 = tk.Button(temp_root, text="7) Rate my Courses", command=clickButton7)
+    button8 = tk.Button(temp_root, text="8) Create indexes", command=clickButton8)
+    clearButton = tk.Button(temp_root, text="Clear", command=clear)
 
-button1.grid(row=0, column=0)
-button2.grid(row=1, column=0)
-button3.grid(row=2, column=0)
-button4.grid(row=3, column=0)
-button5.grid(row=4, column=0)
-button6.grid(row=5, column=0)
-button7.grid(row=6, column=0)
-button8.grid(row=7, column=0)
-clearButton.grid(row=9, column=0)
+    button1.grid(row=0, column=0)
+    button2.grid(row=1, column=0)
+    button3.grid(row=2, column=0)
+    button4.grid(row=3, column=0)
+    button5.grid(row=4, column=0)
+    button6.grid(row=5, column=0)
+    button7.grid(row=6, column=0)
+    button8.grid(row=7, column=0)
+    clearButton.grid(row=9, column=0)
 
-window.mainloop()
+#window.mainloop()
