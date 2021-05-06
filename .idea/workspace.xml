@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fe19dc3f-1693-4245-9a96-e42f4fc5cf14" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/deletetup.py" afterPath="$PROJECT_DIR$/deletetup.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inserttup.py" afterPath="$PROJECT_DIR$/inserttup.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/querytup.py" afterPath="$PROJECT_DIR$/querytup.py" />
-    </list>
+    <list default="true" id="fe19dc3f-1693-4245-9a96-e42f4fc5cf14" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,10 +11,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="deletetup.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="deletetup.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/deletetup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-351">
+            <state relative-caret-position="-300">
               <caret line="49" column="6" lean-forward="false" selection-start-line="49" selection-start-column="6" selection-end-line="49" selection-end-column="6" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
@@ -28,11 +23,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="inserttup.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="inserttup.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/inserttup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4160">
-              <caret line="486" column="60" lean-forward="false" selection-start-line="486" selection-start-column="60" selection-end-line="486" selection-end-column="60" />
+            <state relative-caret-position="29">
+              <caret line="240" column="18" lean-forward="true" selection-start-line="240" selection-start-column="18" selection-end-line="240" selection-end-column="18" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -43,8 +38,8 @@
       <file leaf-file-name="modifytup.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modifytup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="238" column="17" lean-forward="true" selection-start-line="238" selection-start-column="17" selection-end-line="238" selection-end-column="42" />
+            <state relative-caret-position="1176">
+              <caret line="299" column="17" lean-forward="true" selection-start-line="299" selection-start-column="17" selection-end-line="299" selection-end-column="17" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -112,9 +107,9 @@
       <find>output</find>
       <find>delete</find>
       <find>prepar</find>
-      <find># TODO print message about valid args</find>
       <find>cnx.cursor()</find>
       <find>#TODO print success message</find>
+      <find># TODO print message about valid args</find>
       <find># TODO print success message</find>
     </findStrings>
     <replaceStrings>
@@ -125,8 +120,8 @@
       <replace>select_</replace>
       <replace>delete</replace>
       <replace>select *</replace>
-      <replace>messagebox.showinfo(&quot;showinfo&quot;, &quot;Valid Arguments Required&quot;)</replace>
       <replace>cnx.cursor(prepared=True)</replace>
+      <replace>messagebox.showinfo(&quot;showinfo&quot;, &quot;Valid Arguments Required&quot;)</replace>
       <replace>messagebox.showinfo(&quot;showinfo&quot;, &quot;Insertion Successful!&quot;)</replace>
     </replaceStrings>
   </component>
@@ -217,9 +212,7 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/main.py</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/modifytup.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/reportstup.py</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -374,16 +367,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.51648355" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32872504" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32872504" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23963134" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23963134" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.83870965" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.83870965" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39938557" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -540,8 +532,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modifytup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="238" column="17" lean-forward="true" selection-start-line="238" selection-start-column="17" selection-end-line="238" selection-end-column="42" />
+        <state relative-caret-position="1176">
+          <caret line="299" column="17" lean-forward="true" selection-start-line="299" selection-start-column="17" selection-end-line="299" selection-end-column="17" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
@@ -558,20 +550,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/inserttup.py">
+    <entry file="file://$PROJECT_DIR$/deletetup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4160">
-          <caret line="486" column="60" lean-forward="false" selection-start-line="486" selection-start-column="60" selection-end-line="486" selection-end-column="60" />
+        <state relative-caret-position="-300">
+          <caret line="49" column="6" lean-forward="false" selection-start-line="49" selection-start-column="6" selection-end-line="49" selection-end-column="6" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/deletetup.py">
+    <entry file="file://$PROJECT_DIR$/inserttup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-351">
-          <caret line="49" column="6" lean-forward="false" selection-start-line="49" selection-start-column="6" selection-end-line="49" selection-end-column="6" />
+        <state relative-caret-position="29">
+          <caret line="240" column="18" lean-forward="true" selection-start-line="240" selection-start-column="18" selection-end-line="240" selection-end-column="18" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
