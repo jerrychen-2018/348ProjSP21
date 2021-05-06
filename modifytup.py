@@ -272,10 +272,6 @@ def update_course(id_var):
     for widget in temp_root.winfo_children():
         widget.destroy()
     id = id_var.get()
-    if (id == ""):
-        # TODO print message about valid args
-        change_page("back")
-
     new_name_var = tk.StringVar()
     new_dept_var = tk.StringVar()
 
@@ -362,10 +358,6 @@ def update_building(id_var):
     for widget in temp_root.winfo_children():
         widget.destroy()
     id = id_var.get()
-    if (id == ""):
-        # TODO print message about valid args
-        change_page("back")
-
     new_name_var = tk.StringVar()
     new_add_var = tk.StringVar()
 
@@ -783,9 +775,6 @@ def update_cs(secid_var, cid_var):
         widget.destroy()
     secid = secid_var.get()
     cid = cid_var.get()
-    if (len(secid) == 0 or len(cid) == 0):
-        # TODO print message about valid args
-        change_page("back")
     new_i_var = tk.StringVar()
     new_b_var = tk.StringVar()
 
