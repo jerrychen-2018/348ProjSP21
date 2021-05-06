@@ -55,7 +55,7 @@ def select_student(id_var):
     cnx = connect()
     cursor = cnx.cursor()
     student_data = (id,)
-    selection = ("QUERY FROM Student WHERE student_id = %s")
+    selection = ("Select * from Student where student_id = %s")
     cursor.execute(selection, student_data)
     cnx.commit()
     cursor.close()
@@ -85,7 +85,7 @@ def select_faculty(id_var):
     cnx = connect()
     cursor = cnx.cursor()
     faculty_data = (id,)
-    selection = ("delete "
+    selection = ("select *"
                 "from Faculty "
                 "where fac_id = %s) ")
 
@@ -119,7 +119,7 @@ def select_dormitory(name_var):
     cnx = connect()
     cursor = cnx.cursor()
     dormitory_data = (name,)
-    selection = ("delete "
+    selection = ("select *"
                 "from Dormitory "
                 "where name = %s) ")
 
@@ -153,7 +153,7 @@ def select_course(id_var):
     cnx = connect()
     cursor = cnx.cursor()
     course_data = (id,)
-    selection = ("delete "
+    selection = ("select *"
                 "from Course "
                 "where id = %s) ")
 
@@ -193,7 +193,7 @@ def select_course_section(sec_id_var, course_id_var, instr_id_var, building_var)
     cnx = connect()
     cursor = cnx.cursor()
     course_section_data = (sec_id, course_id)
-    selection = ("delete "
+    selection = ("select *"
                 "from Student "
                 "where section_id = %s AND course_id = %s) ")
 
@@ -228,7 +228,7 @@ def select_department(name_var):
     cnx = connect()
     cursor = cnx.cursor()
     department_data = (name,)
-    selection = ("delete "
+    selection = ("select *"
                 "from Department "
                 "where id = %s) ")
 
@@ -269,7 +269,7 @@ def select_classroom(room_var, building_var):
     cnx = connect()
     cursor = cnx.cursor()
     classrooom_data = (room, building)
-    selection = ("delete "
+    selection = ("select *"
                 "from Classroom "
                 "where room_number = %s AND building_name = %s) ")
     cursor.execute(selection, classrooom_data)
@@ -303,7 +303,7 @@ def select_club(name_var):
     cnx = connect()
     cursor = cnx.cursor()
     club_data = (name,)
-    selection = ("delete "
+    selection = ("select *"
                 "from Club "
                 "where club_name = %s) ")
 

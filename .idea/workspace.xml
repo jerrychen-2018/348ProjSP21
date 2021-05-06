@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fe19dc3f-1693-4245-9a96-e42f4fc5cf14" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TableInsertions/fillEnrolledIn.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TableInsertions/fillBelongsTo.txt" afterPath="$PROJECT_DIR$/TableInsertions/fillBelongsTo.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TableInsertions/fillClassroom.txt" afterPath="$PROJECT_DIR$/TableInsertions/fillClassroom.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TableInsertions/fillFaculty.txt" afterPath="$PROJECT_DIR$/TableInsertions/fillFaculty.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TableInsertions/fillStudent.txt" afterPath="$PROJECT_DIR$/TableInsertions/fillStudent.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/deletetup.py" afterPath="$PROJECT_DIR$/deletetup.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/inserttup.py" afterPath="$PROJECT_DIR$/inserttup.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modifytup.py" afterPath="$PROJECT_DIR$/modifytup.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reportstup.py" afterPath="$PROJECT_DIR$/reportstup.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/querytup.py" afterPath="$PROJECT_DIR$/querytup.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -50,8 +42,20 @@
       <file leaf-file-name="modifytup.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modifytup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5021">
-              <caret line="328" column="11" lean-forward="false" selection-start-line="328" selection-start-column="11" selection-end-line="328" selection-end-column="11" />
+            <state relative-caret-position="566">
+              <caret line="339" column="25" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="376" selection-end-column="32" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="querytup.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/querytup.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-30">
+              <caret line="382" column="47" lean-forward="false" selection-start-line="382" selection-start-column="47" selection-end-line="382" selection-end-column="47" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -62,7 +66,7 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
+            <state relative-caret-position="386">
               <caret line="27" column="5" lean-forward="false" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
@@ -71,7 +75,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="reportstup.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="reportstup.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/reportstup.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
@@ -105,6 +109,7 @@
       <find>deletion</find>
       <find>delete_</find>
       <find>output</find>
+      <find>delete</find>
     </findStrings>
     <replaceStrings>
       <replace>deletion</replace>
@@ -113,6 +118,7 @@
       <replace>selection</replace>
       <replace>select_</replace>
       <replace>delete</replace>
+      <replace>select *</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -122,7 +128,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/querytup.py" />
         <option value="$PROJECT_DIR$/TableInsertions/fillDorm.txt" />
         <option value="$PROJECT_DIR$/TableInsertions/fillStudent.txt" />
         <option value="$PROJECT_DIR$/reports.py" />
@@ -131,11 +136,13 @@
         <option value="$PROJECT_DIR$/inserttup.py" />
         <option value="$PROJECT_DIR$/deletetup.py" />
         <option value="$PROJECT_DIR$/modifytup.py" />
+        <option value="$PROJECT_DIR$/querytup.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="676" />
+    <option name="x" value="293" />
+    <option name="y" value="-8" />
     <option name="width" value="697" />
     <option name="height" value="775" />
   </component>
@@ -362,12 +369,12 @@
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24886535" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.51648355" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32872504" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32872504" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22580644" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23963134" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.83870965" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -440,13 +447,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/querytup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="146" column="25" lean-forward="false" selection-start-line="146" selection-start-column="25" selection-end-line="146" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TableInsertions/fillDorm.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -511,12 +511,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/deletetup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="5" lean-forward="false" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+        <state relative-caret-position="-5197">
+          <caret line="56" column="16" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="376" selection-end-column="32" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reportstup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding>
+            <element signature="e#32#54#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -531,32 +541,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/deletetup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5197">
-          <caret line="56" column="16" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="376" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modifytup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5021">
-          <caret line="328" column="11" lean-forward="false" selection-start-line="328" selection-start-column="11" selection-end-line="328" selection-end-column="11" />
+        <state relative-caret-position="566">
+          <caret line="339" column="25" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="376" selection-end-column="32" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/reportstup.py">
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        <state relative-caret-position="386">
+          <caret line="27" column="5" lean-forward="false" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
           <folding>
-            <element signature="e#32#54#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/querytup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-30">
+          <caret line="382" column="47" lean-forward="false" selection-start-line="382" selection-start-column="47" selection-end-line="382" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
