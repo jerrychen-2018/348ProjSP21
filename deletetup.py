@@ -1,6 +1,7 @@
 import tkinter as tk
 import mysql.connector
 from tkinter import *
+from tkinter import messagebox
 import main as main
 
 
@@ -46,21 +47,21 @@ def student_page(root):
 
 def delete_student(id_var):
     if(len(id_var.get()) == 0):
-       # TODO print message about valid args
+      messagebox.showinfo("showinfo", "Valid Arguments Required")
       change_page("back")
       return
 
     id = id_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     student_data = (id,)
     deletion = ("DELETE FROM Student WHERE student_id = %s")
     cursor.execute(deletion, student_data)
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
+    messagebox.showinfo("showinfo", "Deletion Successful!")
     change_page("main")
 
 #----- v Faculty page and deletion v --------
@@ -76,14 +77,14 @@ def faculty_page(root):
 
 def delete_faculty(id_var):
     if (len(id_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
     id = id_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     faculty_data = (id,)
     deletion = ("delete "
                 "from Faculty "
@@ -93,7 +94,7 @@ def delete_faculty(id_var):
     cnx.commit()
     cursor.close()
     cnx.close()
-    #TODO print success message
+    messagebox.showinfo("showinfo", "Deletion Successful!")
     change_page("main")
 
 #----- v Dormitory page and deletion v --------
@@ -110,14 +111,14 @@ def dormitory_page(root):
 
 def delete_dormitory(name_var):
     if (len(name_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
     name = name_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     dormitory_data = (name,)
     deletion = ("delete "
                 "from Dormitory "
@@ -127,7 +128,7 @@ def delete_dormitory(name_var):
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
+    messagebox.showinfo("showinfo", "Deletion Successful!")
     change_page("main")
 
 #----- v Course page and deletion v --------
@@ -144,14 +145,14 @@ def course_page(root):
 
 def delete_course(id_var):
     if (len(id_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
     id = id_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     course_data = (id,)
     deletion = ("delete "
                 "from Course "
@@ -161,7 +162,7 @@ def delete_course(id_var):
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
+    messagebox.showinfo("showinfo", "Deletion Successful!")
     change_page("main")
 
 #----- v CourseSection page and deletion v --------
@@ -183,7 +184,7 @@ def course_section_page(root):
 
 def delete_course_section(sec_id_var, course_id_var, instr_id_var, building_var):
     if (len(sec_id_var.get()) == 0 or len(course_id_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
@@ -191,7 +192,7 @@ def delete_course_section(sec_id_var, course_id_var, instr_id_var, building_var)
     course_id = course_id_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     course_section_data = (sec_id, course_id)
     deletion = ("delete "
                 "from Student "
@@ -201,7 +202,7 @@ def delete_course_section(sec_id_var, course_id_var, instr_id_var, building_var)
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
+    messagebox.showinfo("showinfo", "Deletion Successful!")
     change_page("main")
 
 
@@ -219,14 +220,14 @@ def department_page(root):
 
 def delete_department(name_var):
     if (len(name_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
     name = name_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     department_data = (name,)
     deletion = ("delete "
                 "from Department "
@@ -236,7 +237,7 @@ def delete_department(name_var):
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
+    messagebox.showinfo("showinfo", "Deletion Successful!")
     change_page("main")
 
 
@@ -259,7 +260,7 @@ def classroom_page(root):
 
 def delete_classroom(room_var, building_var):
     if (len(room_var.get()) == 0 or len(building_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
@@ -267,7 +268,7 @@ def delete_classroom(room_var, building_var):
     building = building_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     classrooom_data = (room, building)
     deletion = ("delete "
                 "from Classroom "
@@ -276,7 +277,7 @@ def delete_classroom(room_var, building_var):
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
+    messagebox.showinfo("showinfo", "Deletion Successful!")
     change_page("main")
 
 
@@ -294,14 +295,14 @@ def club_page(root):
 
 def delete_club(name_var):
     if (len(name_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
     name = name_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     club_data = (name,)
     deletion = ("delete "
                 "from Club "
@@ -311,7 +312,7 @@ def delete_club(name_var):
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
+    messagebox.showinfo("showinfo", "Deletion Successful!")
     change_page("main")
 
 #----- v Building page and deletion v --------
@@ -328,14 +329,14 @@ def building_page(root):
 
 def delete_building(name_var):
     if (len(name_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
     name = name_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     building_data = (name,)
     deletion = ("delete "
                 "from Building "
@@ -345,7 +346,7 @@ def delete_building(name_var):
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
+    messagebox.showinfo("showinfo", "Deletion Successful!")
     change_page("main")
 
 

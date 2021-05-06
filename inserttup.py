@@ -2,6 +2,7 @@ import tkinter as tk
 import mysql.connector
 from tkinter import *
 import main as main
+from tkinter import messagebox
 
 
 
@@ -72,7 +73,7 @@ def student_page(root):
 
 def insert_student(id_var, name_var, grade_var, gpa_var, dorm_var, classification_var, adviser_var):
     if(len(id_var.get()) == 0 or len(name_var.get()) == 0 or len(grade_var.get()) == 0 or len(gpa_var.get()) == 0 or len(dorm_var.get()) == 0 or len(classification_var.get()) == 0 or len(adviser_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
@@ -85,7 +86,7 @@ def insert_student(id_var, name_var, grade_var, gpa_var, dorm_var, classificatio
     adviser = adviser_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     student_data = (id, name, grade, gpa, dorm, classification, adviser)
     insertion = ("INSERT INTO Student "
                  "(student_id, stu_name, grade_level, gpa, dormitory_name, classification, advisor) "
@@ -94,7 +95,7 @@ def insert_student(id_var, name_var, grade_var, gpa_var, dorm_var, classificatio
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
+    messagebox.showinfo("showinfo", "Insertion Successful!")
     change_page("main")
 
 #----- v Faculty page and insertion v --------
@@ -135,7 +136,7 @@ def faculty_page(root):
 def insert_faculty(id_var, name_var, dept_var, salary_var, phone_var, office_var, building_var):
     if (len(id_var.get()) == 0 or len(name_var.get()) == 0 or len(salary_var.get()) == 0 or len(
             phone_var.get()) == 0 or len(office_var.get()) == 0 or len(building_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
@@ -148,7 +149,7 @@ def insert_faculty(id_var, name_var, dept_var, salary_var, phone_var, office_var
     building = building_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     faculty_data = (id, name, dept, salary, phone, office, building)
     insertion = ("INSERT INTO Facultly "
                  "(fac_id, faculty_name, department, salary, phone_number, office, building) "
@@ -183,7 +184,7 @@ def dormitory_page(root):
 
 def insert_dormitory(name_var, dining_var, address_var):
     if (len(name_var.get()) == 0 or len(dining_var.get()) == 0 or len(address_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
@@ -192,7 +193,7 @@ def insert_dormitory(name_var, dining_var, address_var):
     address = address_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     dormitory_data = (name, dining, address)
     insertion = ("INSERT INTO Dormitory "
                  "(dorm_name, address, dining_hall) "
@@ -202,7 +203,7 @@ def insert_dormitory(name_var, dining_var, address_var):
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
+    messagebox.showinfo("showinfo", "Insertion Successful!")
     change_page("main")
 
 #----- v Course page and insertion v --------
@@ -227,7 +228,7 @@ def course_page(root):
 
 def insert_course(id_var, name_var, dept_var):
     if (len(id_var.get()) == 0 or len(name_var.get()) == 0 or len(dept_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
@@ -236,7 +237,7 @@ def insert_course(id_var, name_var, dept_var):
     dept = dept_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     course_data = (id, name, dept)
     insertion = ("INSERT INTO Course "
                  "(course_id, course_name, department) "
@@ -246,7 +247,7 @@ def insert_course(id_var, name_var, dept_var):
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
+    messagebox.showinfo("showinfo", "Insertion Successful!")
     change_page("main")
 
 #----- v CourseSection page and insertion v --------
@@ -277,7 +278,7 @@ def course_section_page(root):
 def insert_course_section(sec_id_var, course_id_var, instr_id_var, building_var):
     if (len(sec_id_var.get()) == 0 or len(course_id_var.get()) == 0 or len(instr_id_var.get()) == 0 or len(
             building_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
@@ -287,7 +288,7 @@ def insert_course_section(sec_id_var, course_id_var, instr_id_var, building_var)
     building = building_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     course_section_data = (sec_id, course_id, instr_id, building)
     insertion = ("INSERT INTO CourseSection "
                  "(section_id, course_id, instructor_id, building) "
@@ -297,7 +298,7 @@ def insert_course_section(sec_id_var, course_id_var, instr_id_var, building_var)
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
+    messagebox.showinfo("showinfo", "Insertion Successful!")
     change_page("main")
 
 
@@ -323,7 +324,7 @@ def department_page(root):
 
 def insert_department(name_var, chair_var, building_var):
     if (len(name_var.get()) == 0 or len(chair_var.get()) == 0 or len(building_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
@@ -332,7 +333,7 @@ def insert_department(name_var, chair_var, building_var):
     building = building_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     department_data = (name, chair, building)
     insertion = ("INSERT INTO Department "
                  "(dept_name, chair, building) "
@@ -342,7 +343,7 @@ def insert_department(name_var, chair_var, building_var):
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
+    messagebox.showinfo("showinfo", "Insertion Successful!")
     change_page("main")
 
 
@@ -368,7 +369,7 @@ def classroom_page(root):
 
 def insert_classroom(room_var, building_var, cap_var):
     if (len(room_var.get()) == 0 or len(building_var.get()) == 0 or len(cap_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
@@ -377,7 +378,7 @@ def insert_classroom(room_var, building_var, cap_var):
     cap = cap_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     classrooom_data = (room, building, cap)
     insertion = ("INSERT INTO Classroom "
                  "(room_number, building_name, capacity) "
@@ -387,7 +388,7 @@ def insert_classroom(room_var, building_var, cap_var):
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
+    messagebox.showinfo("showinfo", "Insertion Successful!")
     change_page("main")
 
 
@@ -419,7 +420,7 @@ def club_page(root):
 def insert_club(name_var, sup_id_var, funding_var, building_var):
     if (len(name_var.get()) == 0 or len(sup_id_var.get()) == 0 or len(funding_var.get()) == 0 or len(
             building_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
@@ -429,7 +430,7 @@ def insert_club(name_var, sup_id_var, funding_var, building_var):
     building = building_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     club_data = (name, sup_id, funding, building)
     insertion = ("INSERT INTO Club"
                  "(club_name, supervisor_id, funding, building_name) "
@@ -439,7 +440,7 @@ def insert_club(name_var, sup_id_var, funding_var, building_var):
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
+    messagebox.showinfo("showinfo", "Insertion Successful!")
     change_page("main")
 
 #----- v Building page and insertion v --------
@@ -464,7 +465,7 @@ def building_page(root):
 
 def insert_building(name_var, address_var, handi_var):
     if (len(name_var.get()) == 0 or len(address_var.get()) == 0 or len(handi_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
@@ -473,7 +474,7 @@ def insert_building(name_var, address_var, handi_var):
     handi = handi_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     building_data = (name, address, handi)
     insertion = ("INSERT INTO Building"
                  "(building_name, address, HasHandicapAccess) "
@@ -483,7 +484,7 @@ def insert_building(name_var, address_var, handi_var):
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
+    messagebox.showinfo("showinfo", "Insertion Successful!")
     change_page("main")
 
 

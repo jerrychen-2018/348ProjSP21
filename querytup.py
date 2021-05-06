@@ -48,14 +48,14 @@ def student_page(root):
 
 def select_student(root, id_var):
     if(len(id_var.get()) == 0):
-       # TODO print message about valid args
+      messagebox.showinfo("showinfo", "Valid Arguments Required")
       change_page("back")
       return
 
     id = id_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     student_data = (id,)
     selection = ("Select * from Student where student_id = %s")
     cursor.execute(selection, student_data)
@@ -80,7 +80,7 @@ def select_student(root, id_var):
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
+    
     change_page("main")
 
 #----- v Faculty page and selection v --------
@@ -96,14 +96,14 @@ def faculty_page(root):
 
 def select_faculty(id_var):
     if (len(id_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
     id = id_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     faculty_data = (id,)
     selection = ("select *"
                 "from Faculty "
@@ -124,7 +124,6 @@ def select_faculty(id_var):
     cnx.commit()
     cursor.close()
     cnx.close()
-    #TODO print success message
     change_page("main")
 
 #----- v Dormitory page and selection v --------
@@ -141,14 +140,14 @@ def dormitory_page(root):
 
 def select_dormitory(name_var):
     if (len(name_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
     name = name_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     dormitory_data = (name,)
     selection = ("select *"
                 "from Dormitory "
@@ -165,7 +164,7 @@ def select_dormitory(name_var):
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
+    
     change_page("main")
 
 #----- v Course page and selection v --------
@@ -182,14 +181,14 @@ def course_page(root):
 
 def select_course(id_var):
     if (len(id_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
     id = id_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     course_data = (id,)
     selection = ("select *"
                 "from Course "
@@ -206,7 +205,6 @@ def select_course(id_var):
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
     change_page("main")
 
 #----- v CourseSection page and selection v --------
@@ -228,7 +226,7 @@ def course_section_page(root):
 
 def select_course_section(sec_id_var, course_id_var, instr_id_var, building_var):
     if (len(sec_id_var.get()) == 0 or len(course_id_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
@@ -236,7 +234,7 @@ def select_course_section(sec_id_var, course_id_var, instr_id_var, building_var)
     co_id = course_id_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     course_section_data = (sec_id, co_id)
     selection = ("select *"
                 "from Student "
@@ -254,7 +252,6 @@ def select_course_section(sec_id_var, course_id_var, instr_id_var, building_var)
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
     change_page("main")
 
 
@@ -272,14 +269,14 @@ def department_page(root):
 
 def select_department(name_var):
     if (len(name_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
     name = name_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     department_data = (name,)
     selection = ("select *"
                 "from Department "
@@ -297,7 +294,6 @@ def select_department(name_var):
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
     change_page("main")
 
 
@@ -320,7 +316,7 @@ def classroom_page(root):
 
 def select_classroom(room_var, building_var):
     if (len(room_var.get()) == 0 or len(building_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
@@ -328,7 +324,7 @@ def select_classroom(room_var, building_var):
     building = building_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     classrooom_data = (room, building)
     selection = ("select *"
                 "from Classroom "
@@ -347,7 +343,6 @@ def select_classroom(room_var, building_var):
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
     change_page("main")
 
 
@@ -365,14 +360,14 @@ def club_page(root):
 
 def select_club(name_var):
     if (len(name_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
     name = name_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     club_data = (name,)
     selection = ("select *"
                 "from Club "
@@ -390,7 +385,6 @@ def select_club(name_var):
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
     change_page("main")
 
 #----- v Building page and selection v --------
@@ -407,16 +401,16 @@ def building_page(root):
 
 def select_building(name_var):
     if (len(name_var.get()) == 0):
-        # TODO print message about valid args
+        messagebox.showinfo("showinfo", "Valid Arguments Required")
         change_page("back")
         return
 
     name = name_var.get()
 
     cnx = connect()
-    cursor = cnx.cursor()
+    cursor = cnx.cursor(prepared=True)
     building_data = (name,)
-    selection = ("delete "
+    selection = ("select *"
                 "from Building "
                 "where building_name = %s) ")
 
@@ -428,7 +422,6 @@ def select_building(name_var):
     cnx.commit()
     cursor.close()
     cnx.close()
-    # TODO print success message
     change_page("main")
 
 
